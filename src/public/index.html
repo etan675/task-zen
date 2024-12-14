@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Todos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <main class="page">
+        <div class="side-bar">
+        </div>
+        <main class="content">
+            <header class="content-header">
+                <div>To dos</div>
+            </header>
+            <ul class="todo-list"></ul>
+            <div class="add-task-button">
+                <svg width="97" height="98" viewBox="0 0 97 98" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M48.5002 30.2V67.8M29.8999 49.0001H67.1002M95 49.0001C95 74.9575 74.1812 96 48.5002 96C22.8188 96 2 74.9575 2 49.0001C2 23.0426 22.8188 2 48.5002 2C74.1812 2 95 23.0426 95 49.0001Z" stroke="white" stroke-width="3.25333" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                New task
+            </div>
+            <form class="new-task-form" method="POST" action="/tasks/new-task">
+                <input id="newTaskInput" type="text" placeholder="New task" name="newTask" autocomplete="off"/>
+            </form>
+        </main>
+    </main>
+  </body>
+  <script src="script.js"></script>
+</html>

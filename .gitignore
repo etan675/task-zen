@@ -1,0 +1,7 @@
+node_modules/
+__tests__/
+dist/
+
+.DS_store
+.env
+

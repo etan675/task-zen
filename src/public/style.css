@@ -1,0 +1,80 @@
+* {
+    box-sizing: border-box;
+}
+
+.not-found-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: #232121;
+    color: white;
+    overflow: hidden;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.side-bar {
+    padding: 8px;
+    width: 387px;
+    background-color: #292929;
+}
+
+.content-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+}
+
+.content {
+    width: 100%;
+    min-height: 100%;
+    overflow: auto;
+    padding: 40px 60px;
+    font-size: 30px;
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+.todo-item {
+    padding: 8px;
+}
+
+.add-task-button {
+    cursor: pointer;
+    width: fit-content;
+    height: 40px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    svg {
+        width: fit-content;
+        height: 100%;
+    }
+}
+
+.new-task-form {
+    display: none;
+
+    input {
+        all: unset
+    };
+}
+
