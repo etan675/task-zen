@@ -23,9 +23,9 @@
                 </svg>
                 <span>New task</span>
             </div>
-            <form class="new-task-form hidden" method="POST" action="/tasks/new">
-                <input id="newTaskInput" type="text" placeholder="New task" name="newTask" autocomplete="off"/>
-            </form>
+            <form class="new-task-form hidden">
+              <input id="newTaskInput" type="text" placeholder="New task" name="newTask" autocomplete="off"/>
+          </form>
         </main>
     </main>
 
@@ -33,10 +33,13 @@
     <template id="todo-item-template">
       <div class="todo-item-template-wrapper">
         <div class="todo-item-container">
-          <label class="todo-item">
-            <input class="todo-item-checkbox" type="checkbox" />
-            <span class="todo-item-text"></span>
-          </label>
+          <div class="todo-item">
+            <label class="todo-item-label">
+              <input class="todo-item-checkbox" type="checkbox" />
+              <span class="todo-item-text"></span>
+            </label>
+            <input class="todo-item-text-input hidden" type="text" disabled />
+          </div>
 
           <div class="todo-item-kebab-menu-container">
             <div class="todo-item-kebab-menu">

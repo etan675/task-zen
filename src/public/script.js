@@ -25,17 +25,16 @@ const handleAddTaskButtonClick = (e) => {
 
     if (!isDisplayed(newTaskForm) && isDisplayed(addTaskButton)) {
         displayElement(newTaskForm);
+        newTaskInput.focus();
         removeElement(addTaskButton);
     }
 }
 
-const handleNewTaskFormOutsideClick = (e) => {
-    if (!newTaskForm.contains(e.target)) {
-        newTaskInput.value = '';
+const handleNewTaskInputBlur = () => {
+    newTaskInput.value = '';
 
-        removeElement(newTaskForm);
-        displayElement(addTaskButton);
-    }
+    removeElement(newTaskForm);
+    displayElement(addTaskButton);
 }
 
 const handleKebabMenuDropdownOutsideClick = (e) => {
@@ -57,25 +56,50 @@ const handleDisplayTasks = async () => {
         tasks.forEach((task) => {
             const todoItemClone = template.content.cloneNode(true);
 
-            const input = todoItemClone.querySelector('.todo-item-checkbox');
             const container =  todoItemClone.querySelector('.todo-item-container');
+            const checkboxInput = todoItemClone.querySelector('.todo-item-checkbox');
             const span = todoItemClone.querySelector('.todo-item-text');
+            const textInput = todoItemClone.querySelector('.todo-item-text-input');
+
             const kebabMenu = todoItemClone.querySelector('.todo-item-kebab-menu');
-            const dropdown = todoItemClone.querySelector('.todo-item-dropdown-menu-item-delete');
+            const dropdown = todoItemClone.querySelector('.todo-item-dropdown-menu');
+            const dropdownEditButton = todoItemClone.querySelector('.todo-item-dropdown-menu-item-edit');
+            const dropdownDeleteButton = todoItemClone.querySelector('.todo-item-dropdown-menu-item-delete');
 
             container.dataset.id = task.id;
-            input.type = 'checkbox';
-            input.checked = task.checked;
-            input.onchange = handleCheckboxChange;
-            span.innerHTML = task.content;
+
+            checkboxInput.checked = task.checked;
+            checkboxInput.onchange = handleCheckboxChange;
+
+            span.textContent = task.content;
+
+            textInput.value = task.content;
+            textInput.onblur = handleTodoTextInputBlur;
+            textInput.onkeydown = handleTodoTextInputKeydown;
+
             kebabMenu.onclick = handleKebabMenuClick;
-            dropdown.onclick = handleTaskDelete;
+
+            dropdown.onclick = handleKebabMenuDropdownClick;
+            dropdownEditButton.onclick = handleShowTaskEdit;
+            dropdownDeleteButton.onclick = handleTaskDelete;
 
             todoList.appendChild(todoItemClone);
         })
 
         todoList.scrollTop = todoList.scrollHeight;
     }
+}
+
+const handleCreateNewTask = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(newTaskForm);
+    const data = { newTask: formData.get('newTask') };
+
+    const newTask = await createNewTask(data);
+
+    // can client side revalidate
+    window.location.reload();
 }
 
 const handleCheckboxChange = async (e) => {
@@ -113,21 +137,72 @@ const handleKebabMenuClick = (e) => {
     }
 }
 
+const handleKebabMenuDropdownClick = (e) => {
+    const dropdown = e.currentTarget;
+
+    removeElement(dropdown);
+}
+
 const handleTaskDelete = async (e) => {
     const deleteButton = e.target;
     const todoItemContainer = deleteButton.closest('.todo-item-container');
     
     const taskId = todoItemContainer.dataset.id;
-    
-    deleteTask(taskId);
+
+    const deletedId = deleteTask(taskId);
+
+    // can client side revalidate
+    window.location.reload();
 }
 
+const handleShowTaskEdit = (e) => {
+    const editButton = e.target;
+    const todoItemContainer = editButton.closest('.todo-item-container');
+    const todoText = todoItemContainer.querySelector('.todo-item-text');
+    const todoTextInput = todoItemContainer.querySelector('.todo-item-text-input');
+
+    if (!isDisplayed(todoTextInput)) {
+        todoTextInput.disabled = false;
+
+        displayElement(todoTextInput);
+
+        todoTextInput.focus();
+
+        removeElement(todoText);
+    }
+}
+
+const handleTodoTextInputBlur = async (e) => {
+    const todoTextInput = e.target;
+    const todoItemContainer = todoTextInput.closest('.todo-item-container');
+    const todoText = todoItemContainer.querySelector('.todo-item-text');
+
+    const taskId = todoItemContainer.dataset.id;
+
+    todoTextInput.disabled = true;
+
+    const editedTask = await editTaskContent(taskId, todoTextInput.value);
+
+    todoText.textContent = editedTask.content;
+
+    removeElement(todoTextInput);
+    displayElement(todoText);
+}
+
+const handleTodoTextInputKeydown = (e) => {
+    const todoTextInput = e.target;
+
+    if (e.key === "Enter") {
+        todoTextInput.blur();
+    }
+}
 
 // event listeners
-addTaskButton.addEventListener('click', handleAddTaskButtonClick)
+addTaskButton.addEventListener('click', handleAddTaskButtonClick);
+newTaskForm.addEventListener('submit', handleCreateNewTask);
+newTaskInput.addEventListener('blur', handleNewTaskInputBlur);
 
 window.addEventListener('click', (e) => {
-    handleNewTaskFormOutsideClick(e);
     handleKebabMenuDropdownOutsideClick(e);
 })
 
@@ -141,18 +216,41 @@ const getTasks = async () => {
         const res = await fetch('/tasks');
 
         if (!res.ok) {
-            throw new Error('error!')
+            throw new Error('get tasks failed')
         }
 
-        const json =  await res.json();
-        return json;
+        return await res.json();
+
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+const createNewTask = async (task) => {
+    try {
+        const res = await fetch('/tasks/new', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(task)
+        })
+
+        if (!res.ok) {
+            throw new Error('create task failed')
+        }
+
+        return await res.json();
+
     } catch (err) {
         console.error(err);
     }
 }
 
 const changeTaskChecked = async (taskId, checked) => {
-    return editTask(taskId, { checked });
+    return await editTask(taskId, { checked });
+}
+
+const editTaskContent = async (taskId, content) => {
+    return await editTask(taskId, { content });
 }
 
 const editTask = async (taskId, newTask) => {
@@ -164,11 +262,11 @@ const editTask = async (taskId, newTask) => {
         });
 
         if (!res.ok) {
-            throw new Error('error');
+            throw new Error('edit task failed');
         }
 
-        const json = await res.json();
-        return json;
+        return await res.json();
+
     } catch (err) {
         console.error(err);
     }
@@ -181,10 +279,11 @@ const deleteTask = async (taskId) => {
         });
 
         if (!res.ok) {
-            throw new Error('error');
+            throw new Error('delete task failed');
         }
 
-        window.location.reload();
+        return await res.json();
+
     } catch (err) {
         console.error(err);
     }

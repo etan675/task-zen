@@ -67,6 +67,11 @@ body {
 
 .todo-item {
     padding: 8px;
+    display: flex;
+    gap: 12px;
+}
+
+.todo-item-label {
     cursor: pointer;
     display: flex;
     gap: 12px;
@@ -90,7 +95,7 @@ body {
     border-radius: 2px;
     cursor: pointer;
     outline: none;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: border-color 0.2s ease;
     flex-shrink: 0;
 }
 
@@ -98,7 +103,9 @@ body {
     appearance: checkbox;
 }
 
-.todo-item-text {
+.todo-item-text-input {
+    all: unset;
+
     transition: color 0.2s, text-decoration 0.2s ease;
 }
 
@@ -176,9 +183,10 @@ body {
 }
 
 .new-task-form {
+    width: fit-content;
+
     input {
         all: unset;
-        width: 100%
     };
 }
 

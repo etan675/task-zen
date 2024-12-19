@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createTasksService } from "../Initservices";
+import { createTasksService } from "../initServices";
 
 const taskService = createTasksService();
 
@@ -12,13 +12,13 @@ const tasksController = (req: Request, res: Response) => {
 const newTaskController = (req: Request, res: Response) => {
     const { newTask } = req.body;
 
-    if (newTask) {
-        taskService.createTask(newTask);
+    try {
+        const createdTask = taskService.createTask(newTask);
 
-        // revalidate page
-        res.redirect('/'); 
-    } else {
-        res.status(400).json({ error:'bad request, name is required' });
+        res.json(createdTask);
+
+    } catch {
+        res.status(400).json({ error: 'bad request, could not create task' });
     }
 }
 
