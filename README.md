@@ -25,9 +25,9 @@ URL:
 Todo features:
 
 - add db
-- project tracker
-- auth (normal auth?, github sso?)
+- auth + security
 - host app (full stack)
+- project tracker 
 
 
 

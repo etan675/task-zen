@@ -1,5 +1,5 @@
 import express from 'express';
-import { checkTaskController, deleteTaskController, newTaskController, tasksController } from '../controllers/tasksController';
+import { deleteTaskController, editTaskController, newTaskController, tasksController } from '../controllers/tasks-controller';
 
 const taskRouter = express.Router();
 
@@ -7,7 +7,7 @@ taskRouter.get('/', tasksController);
 
 taskRouter.post('/new', newTaskController);
 
-taskRouter.patch('/check/:id', checkTaskController);
+taskRouter.patch('/edit/:id', editTaskController);
 
 taskRouter.delete('/delete/:id', deleteTaskController);
 

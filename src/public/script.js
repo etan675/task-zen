@@ -83,18 +83,13 @@ const handleCheckboxChange = async (e) => {
     const todoItemContainer = checkbox.closest('.todo-item-container');
     const taskId = todoItemContainer.dataset.id;
 
-    const newTasks = await changeTaskChecked(taskId);
-
     // disabled when waiting for query response
     checkbox.disabled = true;
 
-    // validate checkboxes against data
-    newTasks?.forEach((task) => {
-        const todoCheckbox = document.querySelector(`[data-id="${task.id}"]`);
+    const newTask = await changeTaskChecked(taskId, checkbox.checked);
 
-        todoCheckbox.checked = task.checked;
-    })
-
+    // revalidate the checkbox state
+    checkbox.checked = newTask.checked;
     checkbox.disabled = false
 }
 
@@ -156,10 +151,16 @@ const getTasks = async () => {
     }
 }
 
-const changeTaskChecked = async (taskId) => {
+const changeTaskChecked = async (taskId, checked) => {
+    return editTask(taskId, { checked });
+}
+
+const editTask = async (taskId, newTask) => {
     try {
-        const res = await fetch(`/tasks/check/${taskId}`, {
-            method: 'PATCH'
+        const res = await fetch(`/tasks/edit/${taskId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ...newTask }),
         });
 
         if (!res.ok) {
