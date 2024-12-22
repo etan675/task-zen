@@ -1,27 +1,51 @@
-import { TaskUpdateSchema } from "../types/task/definitions";
-import TaskRepositoryContract from "./repository-interfaces/TaskRepositoryContract";
+import { TaskUpdateSchema } from "../types/definitions";
+import TaskRepositoryInterface from "./repository-interfaces/TaskRepositoryInterface";
 
 class TasksService {
-    private taskRepository: TaskRepositoryContract;
+    private taskRepository: TaskRepositoryInterface;
 
-    constructor(taskRepository: TaskRepositoryContract) {
+    constructor(taskRepository: TaskRepositoryInterface) {
         this.taskRepository = taskRepository;
     }
 
-    createTask(newTask: string) {
-        return this.taskRepository.createTask(newTask);
+    async createTask(newTask: string) {
+        try {
+            return await this.taskRepository.createTask(newTask);
+
+        } catch (err) {
+            console.log(err.message);
+            throw new Error('Failed to create task');
+        }
     }
 
-    getTasks() {
-        return this.taskRepository.getTasks();
+    async getTasks() {
+        try {
+            return await this.taskRepository.getTasks();
+
+        } catch (err) {
+            console.log(err.message);
+            throw new Error('Failed to get tasks');
+        }
     }
 
-    editTask(id: number, updateFields: TaskUpdateSchema) {
-        return this.taskRepository.editTask(id, updateFields);
+    async editTask(id: number, updateFields: TaskUpdateSchema) {
+        try {
+            return await this.taskRepository.editTask(id, updateFields);
+
+        } catch (err) {
+            console.log(err.message);
+            throw new Error('Failed to edit task');
+        }
     }
 
-    deleteTask(id: number) {
-        return this.taskRepository.deleteTask(id);
+    async deleteTask(id: number) {
+        try {
+            return this.taskRepository.deleteTask(id);
+
+        } catch (err) {
+            console.log(err.message);
+            throw new Error('Failed to delete task');
+        }
     }
 }
 

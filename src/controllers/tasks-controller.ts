@@ -3,18 +3,21 @@ import { createTasksService } from "../initServices";
 
 const taskService = createTasksService();
 
-const tasksController = (req: Request, res: Response) => {
-    const allTasks = taskService.getTasks()
+const tasksController = async (req: Request, res: Response) => {
+    try {
+        const allTasks = await taskService.getTasks();
+        res.json(allTasks);
 
-    res.json(allTasks);
+    } catch (err) {
+        res.status(404).json({ error: err.message });
+    }
 }
 
-const newTaskController = (req: Request, res: Response) => {
+const newTaskController = async (req: Request, res: Response) => {
     const { newTask } = req.body;
 
     try {
-        const createdTask = taskService.createTask(newTask);
-
+        const createdTask = await taskService.createTask(newTask);
         res.json(createdTask);
 
     } catch {
@@ -22,13 +25,12 @@ const newTaskController = (req: Request, res: Response) => {
     }
 }
 
-const editTaskController = (req: Request, res: Response) => {
+const editTaskController = async (req: Request, res: Response) => {
     const { id } = req.params;
     const fields = req.body;
 
     try {
-        const result = taskService.editTask(parseInt(id), fields);
-
+        const result = await taskService.editTask(parseInt(id), fields);
         res.status(200).json(result);
 
     } catch {
@@ -36,13 +38,12 @@ const editTaskController = (req: Request, res: Response) => {
     }
 } 
 
-const deleteTaskController = (req: Request, res: Response) => {
+const deleteTaskController = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     try {
-        const deletedId = taskService.deleteTask(parseInt(id));
-
-        res.json({ deletedId: deletedId });
+        const deletedId = await taskService.deleteTask(parseInt(id));
+        res.json({ deletedId });
 
     } catch {
         res.status(404).json({ error: 'item not found' });
