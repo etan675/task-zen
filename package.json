@@ -5,9 +5,11 @@
   "scripts": {
     "build": "",
     "start": "node dist/app.js",
-    "dev": "nodemon --exec tsx src/initApp.ts",
+    "dev": "npm-run-all --parallel watch:express watch:sass",
     "test": "jest",
-    "lint": "eslint -c eslint.config.mjs "
+    "lint": "eslint -c eslint.config.mjs ",
+    "watch:express": "nodemon --exec tsx src/initApp.ts",
+    "watch:sass": "sass --watch ./src/sass/main.scss ./src/public/style.css "
   },
   "type": "module",
   "author": "",
@@ -24,6 +26,9 @@
     "eslint-plugin-jest": "^28.9.0",
     "globals": "^15.13.0",
     "jest": "^29.7.0",
+    "nodemon": "^3.1.9",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.83.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.17.0"

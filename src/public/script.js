@@ -38,7 +38,7 @@ const handleNewTaskInputBlur = () => {
 }
 
 const handleKebabMenuDropdownOutsideClick = (e) => {
-    const kebabMenuDropdowns = document.querySelectorAll('.todo-item-dropdown-menu');
+    const kebabMenuDropdowns = document.querySelectorAll('.todo-item__dropdown-menu');
 
     kebabMenuDropdowns.forEach((dropdown) => {
         if (!dropdown.contains(e.target)) {
@@ -56,15 +56,15 @@ const handleDisplayTasks = async () => {
         tasks.forEach((task) => {
             const todoItemClone = template.content.cloneNode(true);
 
-            const container =  todoItemClone.querySelector('.todo-item-container');
-            const checkboxInput = todoItemClone.querySelector('.todo-item-checkbox');
-            const span = todoItemClone.querySelector('.todo-item-text');
-            const textInput = todoItemClone.querySelector('.todo-item-text-input');
+            const container =  todoItemClone.querySelector('.todo-item__container');
+            const checkboxInput = todoItemClone.querySelector('.todo-item__checkbox');
+            const span = todoItemClone.querySelector('.todo-item__text');
+            const textInput = todoItemClone.querySelector('.todo-item__text-input');
 
-            const kebabMenu = todoItemClone.querySelector('.todo-item-kebab-menu');
-            const dropdown = todoItemClone.querySelector('.todo-item-dropdown-menu');
-            const dropdownEditButton = todoItemClone.querySelector('.todo-item-dropdown-menu-item-edit');
-            const dropdownDeleteButton = todoItemClone.querySelector('.todo-item-dropdown-menu-item-delete');
+            const kebabMenu = todoItemClone.querySelector('.todo-item__kebab-menu');
+            const dropdown = todoItemClone.querySelector('.todo-item__dropdown-menu');
+            const dropdownEditButton = todoItemClone.querySelector('.todo-item__dropdown-menu--edit');
+            const dropdownDeleteButton = todoItemClone.querySelector('.todo-item__dropdown-menu--delete');
 
             container.dataset.id = task.id;
 
@@ -104,7 +104,7 @@ const handleCreateNewTask = async (e) => {
 
 const handleCheckboxChange = async (e) => {
     const checkbox = e.target;
-    const todoItemContainer = checkbox.closest('.todo-item-container');
+    const todoItemContainer = checkbox.closest('.todo-item__container');
     const taskId = todoItemContainer.dataset.id;
 
     // disabled when waiting for query response
@@ -122,7 +122,7 @@ const handleKebabMenuClick = (e) => {
 
     const kebabMenu = e.currentTarget;
     const kebabMenuContainer = kebabMenu.parentNode;
-    const dropdown = kebabMenuContainer.querySelector('.todo-item-dropdown-menu');
+    const dropdown = kebabMenuContainer.querySelector('.todo-item__dropdown-menu');
 
     if (isDisplayed(dropdown)) {
         removeElement(dropdown);
@@ -145,7 +145,7 @@ const handleKebabMenuDropdownClick = (e) => {
 
 const handleTaskDelete = async (e) => {
     const deleteButton = e.target;
-    const todoItemContainer = deleteButton.closest('.todo-item-container');
+    const todoItemContainer = deleteButton.closest('.todo-item__container');
     
     const taskId = todoItemContainer.dataset.id;
 
@@ -157,9 +157,9 @@ const handleTaskDelete = async (e) => {
 
 const handleShowTaskEdit = (e) => {
     const editButton = e.target;
-    const todoItemContainer = editButton.closest('.todo-item-container');
-    const todoText = todoItemContainer.querySelector('.todo-item-text');
-    const todoTextInput = todoItemContainer.querySelector('.todo-item-text-input');
+    const todoItemContainer = editButton.closest('.todo-item__container');
+    const todoText = todoItemContainer.querySelector('.todo-item__text');
+    const todoTextInput = todoItemContainer.querySelector('.todo-item__text-input');
 
     if (!isDisplayed(todoTextInput)) {
         todoTextInput.disabled = false;
@@ -174,8 +174,8 @@ const handleShowTaskEdit = (e) => {
 
 const handleTodoTextInputBlur = async (e) => {
     const todoTextInput = e.target;
-    const todoItemContainer = todoTextInput.closest('.todo-item-container');
-    const todoText = todoItemContainer.querySelector('.todo-item-text');
+    const todoItemContainer = todoTextInput.closest('.todo-item__container');
+    const todoText = todoItemContainer.querySelector('.todo-item__text');
 
     const taskId = todoItemContainer.dataset.id;
 
