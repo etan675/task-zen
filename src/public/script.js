@@ -56,7 +56,7 @@ const handleDisplayTasks = async () => {
         tasks.forEach((task) => {
             const todoItemClone = template.content.cloneNode(true);
 
-            const container =  todoItemClone.querySelector('.todo-item__container');
+            const container =  todoItemClone.querySelector('.todo-item-container');
             const checkboxInput = todoItemClone.querySelector('.todo-item__checkbox');
             const span = todoItemClone.querySelector('.todo-item__text');
             const textInput = todoItemClone.querySelector('.todo-item__text-input');
@@ -104,7 +104,7 @@ const handleCreateNewTask = async (e) => {
 
 const handleCheckboxChange = async (e) => {
     const checkbox = e.target;
-    const todoItemContainer = checkbox.closest('.todo-item__container');
+    const todoItemContainer = checkbox.closest('.todo-item-container');
     const taskId = todoItemContainer.dataset.id;
 
     // disabled when waiting for query response
@@ -145,7 +145,7 @@ const handleKebabMenuDropdownClick = (e) => {
 
 const handleTaskDelete = async (e) => {
     const deleteButton = e.target;
-    const todoItemContainer = deleteButton.closest('.todo-item__container');
+    const todoItemContainer = deleteButton.closest('.todo-item-container');
     
     const taskId = todoItemContainer.dataset.id;
 
@@ -157,7 +157,7 @@ const handleTaskDelete = async (e) => {
 
 const handleShowTaskEdit = (e) => {
     const editButton = e.target;
-    const todoItemContainer = editButton.closest('.todo-item__container');
+    const todoItemContainer = editButton.closest('.todo-item-container');
     const todoText = todoItemContainer.querySelector('.todo-item__text');
     const todoTextInput = todoItemContainer.querySelector('.todo-item__text-input');
 
@@ -174,13 +174,14 @@ const handleShowTaskEdit = (e) => {
 
 const handleTodoTextInputBlur = async (e) => {
     const todoTextInput = e.target;
-    const todoItemContainer = todoTextInput.closest('.todo-item__container');
+    const todoItemContainer = todoTextInput.closest('.todo-item-container');
     const todoText = todoItemContainer.querySelector('.todo-item__text');
 
     const taskId = todoItemContainer.dataset.id;
 
     todoTextInput.disabled = true;
 
+    // if was active then unfocused, just submit the new content
     const editedTask = await editTaskContent(taskId, todoTextInput.value);
 
     todoText.textContent = editedTask.content;
