@@ -1,0 +1,65 @@
+@use "../utils/mixins";
+
+.side-bar {
+    height: 100%;
+    background-color: var(--sidebar-bg-color);
+    padding: 2rem 1.5rem;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--sidebar-text-color);
+
+    &__tabs-container {
+        margin-top: 4rem;
+    }
+
+    &__tab {
+        padding: .8rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-radius: .6rem;
+
+        &:hover {
+            cursor: pointer;
+            background-color: var(--tab-hover-bg);
+            color: var(--main-text-color);
+        }
+
+        &--profile {
+            color: var(--main-text-color);
+        }
+    }
+
+    &__tab-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        flex: 0 0 auto;
+
+        svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--sidebar-text-color);
+        }
+
+        &--profile {
+            border-radius: .4rem;
+            overflow: hidden;
+
+            background-color: #464646;
+        }
+
+        &--small {
+            width: 2rem;
+            height: 1.7rem;
+        }
+    }
+
+    &__tab-label {
+        // makes alignment look better
+        transform: translateY(1px);
+
+        &--profile {
+            @include mixins.clippableText;
+        }
+    }
+}

@@ -1,0 +1,6 @@
+@use "../utils/mixins";
+
+.not-found-message {
+    @include mixins.centerAbsolute;
+    font-size: 2.4rem;
+}

@@ -4,19 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Todos</title>
+    <title>My Tasks</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
   </head>
   <body>
-    <main class="page">
-        <div class="side-bar"></div>
-        <main class="content">
-            <header class="content__header">
-                <div>To dos</div>
-            </header>
+    <div class="page">
+      <div class="side-bar-layout">
+        <div class="side-bar">
+          <header class="side-bar__tab side-bar__tab--profile">
+            <div class="side-bar__tab-icon side-bar__tab-icon--profile">
+              <!-- placeholder -->
+              <div style="font-size: 16px; height: 100%; display: flex; align-items: center; justify-content: center;">E</div>
+            </div>
+            <span class="side-bar__tab-label side-bar__tab-label--profile" title="Eric Tang's Space">Eric Tang's Space</span>
+            <div class="side-bar__tab-icon side-bar__tab-icon--small">
+              <svg width="64px" height="64px" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                <g id="SVGRepo_iconCarrier">
+                    <path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" />
+                </g>
+              </svg>
+            </div>
+          </header>
+          <div class="side-bar__tabs-container">
+            <div class="side-bar__tab">
+              <div class="side-bar__tab-icon">
+                <svg style="transform: scale(1.15);" width="64px" height="64px" viewBox="0 0 24 24" fill="#909090">
+                  <g id="SVGRepo_iconCarrier">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4498 10.275L11.9998 3.1875L2.5498 10.275L2.9998 11.625H3.7498V20.25H20.2498V11.625H20.9998L21.4498 10.275ZM5.2498 18.75V10.125L11.9998 5.0625L18.7498 10.125V18.75H14.9999V14.3333L14.2499 13.5833H9.74988L8.99988 14.3333V18.75H5.2498ZM10.4999 18.75H13.4999V15.0833H10.4999V18.75Z" />
+                  </g>
+                </svg>
+              </div>
+              <span class="side-bar__tab-label">Home</span>
+            </div>
+            <div class="side-bar__tab">
+              <div class="side-bar__tab-icon">
+                <svg width="64px" height="64px" viewBox="0 0 512 512" fill="#909090">
+                  <g id="SVGRepo_iconCarrier">
+                      <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">
+                          <g id="Combined-Shape" transform="translate(70.530593, 46.125620)">
+                              <path d="M185.469407,39.207713 L356.136074,39.207713 L356.136074,81.8743797 L185.469407,81.8743797 L185.469407,39.207713 Z M185.469407,188.541046 L356.136074,188.541046 L356.136074,231.207713 L185.469407,231.207713 L185.469407,188.541046 Z M185.469407,337.87438 L356.136074,337.87438 L356.136074,380.541046 L185.469407,380.541046 L185.469407,337.87438 Z M119.285384,-7.10542736e-15 L144.649352,19.5107443 L68.6167605,118.353113 L2.84217094e-14,58.3134476 L21.0721475,34.2309934 L64.0400737,71.8050464 L119.285384,-7.10542736e-15 Z M119.285384,149.333333 L144.649352,168.844078 L68.6167605,267.686446 L2.84217094e-14,207.646781 L21.0721475,183.564327 L64.0400737,221.13838 L119.285384,149.333333 Z M119.285384,298.666667 L144.649352,318.177411 L68.6167605,417.01978 L2.84217094e-14,356.980114 L21.0721475,332.89766 L64.0400737,370.471713 L119.285384,298.666667 Z"></path>
+                          </g>
+                      </g>
+                  </g>
+                </svg>
+              </div>
+              <span class="side-bar__tab-label">Tasks</span>
+            </div>
+            <div class="side-bar__tab">
+              <div class="side-bar__tab-icon">
+                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="#909090">
+                  <g id="SVGRepo_iconCarrier">
+                      <path d="M17 5V3H7v2H1v16h22V5zM8 4h8v1H8zm14 16H2V10h20zm0-11H2V6h20z" />
+                  </g>
+                </svg>
+              </div>
+              <span class="side-bar__tab-label">Projects</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-layout">
+        <main class="tasks-content">
+          <header class="tasks-content__header">
+              <div>To dos</div>
+          </header>
+          <section class="tasks-content__main">
             <div class="todo-list"></div>
-
             <div class="add-task-button">
                 <svg width="97" height="98" viewBox="0 0 97 98" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M48.5002 30.2V67.8M29.8999 49.0001H67.1002M95 49.0001C95 74.9575 74.1812 96 48.5002 96C22.8188 96 2 74.9575 2 49.0001C2 23.0426 22.8188 2 48.5002 2C74.1812 2 95 23.0426 95 49.0001Z" stroke="white" stroke-width="3.25333" stroke-linecap="round" stroke-linejoin="round"/>
@@ -25,9 +81,11 @@
             </div>
             <form class="new-task-form hidden">
               <input id="newTaskInput" type="text" placeholder="New task" name="newTask" autocomplete="off"/>
-          </form>
+            </form>
+          </section>
         </main>
-    </main>
+      </div>
+    </div>  
 
     <!-- todo item templates -->
     <template id="todo-item-template">

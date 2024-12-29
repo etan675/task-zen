@@ -1,26 +1,119 @@
+:root {
+  --content-bg-color: #181818;
+  --sidebar-bg-color: #1D1D1D;
+  --main-text-color: #D3D3D3;
+  --tab-hover-bg: rgba(95, 94, 94, 0.3);
+  --sidebar-text-color: #909090;
+}
+
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
 }
 
 body {
   width: 100vw;
   height: 100vh;
-  background-color: #232121;
-  color: white;
+  background-color: var(--content-bg-color);
+  color: var(--main-text-color);
   overflow: hidden;
   margin: 0;
   font-family: sans-serif;
 }
 
-.not-found-message {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
+.page {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.side-bar-layout {
+  width: 33rem;
+  min-width: 24rem;
+}
+
+.content-layout {
+  flex: 1;
+  min-width: 40rem;
+  max-height: 100%;
+}
+
+.side-bar {
+  height: 100%;
+  background-color: var(--sidebar-bg-color);
+  padding: 2rem 1.5rem;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--sidebar-text-color);
+}
+.side-bar__tabs-container {
+  margin-top: 4rem;
+}
+.side-bar__tab {
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.6rem;
+}
+.side-bar__tab:hover {
+  cursor: pointer;
+  background-color: var(--tab-hover-bg);
+  color: var(--main-text-color);
+}
+.side-bar__tab--profile {
+  color: var(--main-text-color);
+}
+.side-bar__tab-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 auto;
+}
+.side-bar__tab-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--sidebar-text-color);
+}
+.side-bar__tab-icon--profile {
+  border-radius: 0.4rem;
+  overflow: hidden;
+  background-color: #464646;
+}
+.side-bar__tab-icon--small {
+  width: 2rem;
+  height: 1.7rem;
+}
+.side-bar__tab-label {
+  transform: translateY(1px);
+}
+.side-bar__tab-label--profile {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.tasks-content {
+  padding: 12rem 15% 6rem 25%;
+  font-size: 3rem;
+}
+.tasks-content__header {
+  display: flex;
+  align-items: center;
+  font-size: 4rem;
+}
+.tasks-content__main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 3rem;
 }
 
 .todo-list {
-  margin-top: 20px;
   overflow: auto;
 }
 
@@ -36,14 +129,14 @@ body {
 }
 
 .todo-item {
-  padding: 8px;
+  padding: 0.8rem;
   display: flex;
-  gap: 12px;
+  gap: 1.2rem;
 }
 .todo-item__label {
   cursor: pointer;
   display: flex;
-  gap: 12px;
+  gap: 1.2rem;
   width: fit-content;
 }
 .todo-item__label input[type=checkbox]:checked + .todo-item__text {
@@ -53,9 +146,9 @@ body {
 .todo-item__checkbox {
   -webkit-appearance: none;
   appearance: none;
-  margin-top: 8px;
-  width: 20px;
-  height: 20px;
+  margin-top: 0.8rem;
+  width: 2rem;
+  height: 2rem;
   border: 2px solid white;
   background-color: transparent;
   border-radius: 2px;
@@ -70,38 +163,38 @@ body {
   all: unset;
 }
 .todo-item__kebab-menu-container {
-  width: 40px;
-  height: 40px;
+  width: 4rem;
+  height: 4rem;
   cursor: pointer;
-  margin-right: 2px;
+  margin-right: 0.2rem;
 }
 .todo-item__kebab-menu {
   width: 100%;
   height: 100%;
-  padding: 4px;
+  padding: 0.4rem;
 }
 .todo-item__kebab-menu svg {
   width: 100%;
   height: 100%;
 }
 .todo-item__kebab-menu:hover {
-  background: rgba(95, 94, 94, 0.3);
+  background: var(--tab-hover-bg);
   border-radius: 4px;
 }
 .todo-item__dropdown-menu {
   position: fixed;
   z-index: 100;
-  font-size: 18px;
-  padding: 12px;
+  font-size: 1.8rem;
+  padding: 1.2rem;
   background-color: #3c3b3b;
   border-radius: 6px;
-  min-width: 135px;
+  min-width: 13.5rem;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.4rem;
 }
 .todo-item__dropdown-menu--edit, .todo-item__dropdown-menu--delete {
-  padding: 8px;
+  padding: 0.8rem;
   cursor: pointer;
   border-radius: 4px;
   display: flex;
@@ -109,11 +202,11 @@ body {
   justify-content: space-between;
 }
 .todo-item__dropdown-menu--edit span, .todo-item__dropdown-menu--delete span {
-  padding: 0 4px;
+  padding: 0 0.4rem;
 }
 .todo-item__dropdown-menu--edit svg, .todo-item__dropdown-menu--delete svg {
-  width: 25px;
-  height: 25px;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 .todo-item__dropdown-menu--edit:hover, .todo-item__dropdown-menu--delete:hover {
   background: rgba(136, 135, 135, 0.3);
@@ -122,11 +215,11 @@ body {
 .add-task-button {
   cursor: pointer;
   width: fit-content;
-  height: 40px;
-  padding: 4px;
+  height: 4rem;
+  padding: 0.4rem;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
 }
 .add-task-button svg {
   width: fit-content;
@@ -140,33 +233,12 @@ body {
   all: unset;
 }
 
-.page {
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-
-.side-bar {
-  padding: 8px;
-  width: 387px;
-  background-color: #292929;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  min-width: 400px;
-  max-height: 100%;
-  padding: 60px 15%;
-  font-size: 30px;
-}
-.content__header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  font-size: 40px;
+.not-found-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 2.4rem;
 }
 
 .hidden {

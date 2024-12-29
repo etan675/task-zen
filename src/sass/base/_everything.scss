@@ -1,0 +1,28 @@
+:root {
+    // colors
+    --content-bg-color: #181818;
+    --sidebar-bg-color: #1D1D1D;
+    --main-text-color: #D3D3D3;
+    --tab-hover-bg: rgba(95, 94, 94, 0.3);
+    --sidebar-text-color: #909090;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--content-bg-color);
+    color: var(--main-text-color);
+    overflow: hidden;
+    margin: 0;
+    font-family: sans-serif;
+}
