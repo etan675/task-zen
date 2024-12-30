@@ -5,6 +5,8 @@ const newTaskForm = document.querySelector(".new-task-form");
 const newTaskInput = document.getElementById('newTaskInput');
 const addTaskButton = document.querySelector(".add-task-button");
 const todoList = document.querySelector(".todo-list");
+const sidebarProfileTab = document.querySelector('.sidebar__tab--profile');
+const sidebarTabs = document.querySelectorAll('.sidebar__tab');
 
 // helpers
 const isDisplayed = (el) => {
@@ -35,16 +37,6 @@ const handleNewTaskInputBlur = () => {
 
     removeElement(newTaskForm);
     displayElement(addTaskButton);
-}
-
-const handleKebabMenuDropdownOutsideClick = (e) => {
-    const kebabMenuDropdowns = document.querySelectorAll('.todo-item__dropdown-menu');
-
-    kebabMenuDropdowns.forEach((dropdown) => {
-        if (!dropdown.contains(e.target)) {
-            removeElement(dropdown);
-        }
-    });
 }
 
 const handleDisplayTasks = async () => {
@@ -96,7 +88,7 @@ const handleCreateNewTask = async (e) => {
     const formData = new FormData(newTaskForm);
     const data = { newTask: formData.get('newTask') };
 
-    const newTask = await createNewTask(data);
+    await createNewTask(data);
 
     // can client side revalidate
     window.location.reload();
@@ -124,23 +116,28 @@ const handleKebabMenuClick = (e) => {
     const kebabMenuContainer = kebabMenu.parentNode;
     const dropdown = kebabMenuContainer.querySelector('.todo-item__dropdown-menu');
 
-    if (isDisplayed(dropdown)) {
-        removeElement(dropdown);
-    } else {
-        // every time we display the dropdown, we need to calculate the position
-        const rect = kebabMenuContainer.getBoundingClientRect();
+    dropdown.classList.toggle('todo-item__dropdown-menu--open');
 
-        dropdown.style.top = `${rect.bottom + window.scrollY}px`;
-        dropdown.style.left = `${rect.left + window.scrollX + 17}px`;
+    const rect = kebabMenuContainer.getBoundingClientRect();
 
-        displayElement(dropdown);
-    }
+    // align with kebab menu
+    dropdown.style.left = `${rect.left + window.scrollX + 17}px`;
 }
 
 const handleKebabMenuDropdownClick = (e) => {
     const dropdown = e.currentTarget;
 
-    removeElement(dropdown);
+    dropdown.classList.remove('todo-item__dropdown-menu--open');
+}
+
+const handleKebabMenuDropdownOutsideClick = (e) => {
+    const kebabMenuDropdowns = document.querySelectorAll('.todo-item__dropdown-menu');
+
+    kebabMenuDropdowns.forEach((dropdown) => {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('todo-item__dropdown-menu--open');
+        }
+    });
 }
 
 const handleTaskDelete = async (e) => {
@@ -149,7 +146,7 @@ const handleTaskDelete = async (e) => {
     
     const taskId = todoItemContainer.dataset.id;
 
-    const deletedId = deleteTask(taskId);
+    await deleteTask(taskId);
 
     // can client side revalidate
     window.location.reload();
@@ -198,13 +195,48 @@ const handleTodoTextInputKeydown = (e) => {
     }
 }
 
+const handleSidebarProfileClick = (e) => {
+    e.stopPropagation();
+
+    const profileTab = e.currentTarget;
+    const rect = profileTab.getBoundingClientRect();
+    const dropdown = document.querySelector('.sidebar-profile-dropdown');
+    
+    dropdown.classList.toggle('sidebar-profile-dropdown--open');
+    // align with ride edge of profile tab
+    dropdown.style.left = `${rect.right - dropdown.offsetWidth}px`;
+}
+
+const handleSidebarProfileDropdownOutsideClick = (e) => {
+    const dropdown = document.querySelector('.sidebar-profile-dropdown');
+
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('sidebar-profile-dropdown--open');
+    }
+}
+
+const handleSidebarTabClick = (e) => {
+    const tab = e.currentTarget;
+    const activeTab = document.querySelector('.sidebar__tab--active');
+
+    activeTab.classList.remove('sidebar__tab--active');
+    tab.classList.add('sidebar__tab--active');
+}
+
 // event listeners
 addTaskButton.addEventListener('click', handleAddTaskButtonClick);
 newTaskForm.addEventListener('submit', handleCreateNewTask);
 newTaskInput.addEventListener('blur', handleNewTaskInputBlur);
+sidebarProfileTab.addEventListener('click', handleSidebarProfileClick);
+sidebarTabs.forEach(tab => {
+    if (tab.id !== 'sidebarProfileTab') {
+        tab.addEventListener('click', handleSidebarTabClick);
+    }
+})
 
 window.addEventListener('click', (e) => {
     handleKebabMenuDropdownOutsideClick(e);
+    handleSidebarProfileDropdownOutsideClick(e);
 })
 
 window.addEventListener('load', () => {

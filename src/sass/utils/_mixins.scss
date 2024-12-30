@@ -10,3 +10,20 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+@mixin dropdownInitial {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+@mixin dropdownAppear {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+}
+
+@mixin shadowElevation {
+    box-shadow: 8px 10px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, .08);
+}

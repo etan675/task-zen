@@ -1,9 +1,10 @@
 :root {
-  --content-bg-color: #181818;
-  --sidebar-bg-color: #1D1D1D;
-  --main-text-color: #D3D3D3;
-  --tab-hover-bg: rgba(95, 94, 94, 0.3);
+  --black-primary: #181818;
+  --grey-primary: #1D1D1D;
+  --white-primary: #D3D3D3;
+  --grey-hover: rgba(95, 94, 94, 0.3);
   --sidebar-text-color: #909090;
+  --task-dropdown-menu-bg: #242424;
 }
 
 * {
@@ -19,8 +20,8 @@ html {
 body {
   width: 100vw;
   height: 100vh;
-  background-color: var(--content-bg-color);
-  color: var(--main-text-color);
+  background-color: var(--black-primary);
+  color: var(--white-primary);
   overflow: hidden;
   margin: 0;
   font-family: sans-serif;
@@ -32,7 +33,7 @@ body {
   height: 100%;
 }
 
-.side-bar-layout {
+.sidebar-layout {
   width: 33rem;
   min-width: 24rem;
 }
@@ -43,58 +44,104 @@ body {
   max-height: 100%;
 }
 
-.side-bar {
+.sidebar {
   height: 100%;
-  background-color: var(--sidebar-bg-color);
+  background-color: var(--grey-primary);
   padding: 2rem 1.5rem;
   font-size: 2rem;
   line-height: 1;
   color: var(--sidebar-text-color);
+  border-right: 1px solid #343434;
+  box-shadow: 2px 0px 4px rgba(6, 6, 6, 0.1);
 }
-.side-bar__tabs-container {
+.sidebar__tabs-container {
   margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
-.side-bar__tab {
+.sidebar__tab {
   padding: 0.8rem 1rem;
   display: flex;
   align-items: center;
   gap: 1rem;
   border-radius: 0.6rem;
-}
-.side-bar__tab:hover {
+  user-select: none;
   cursor: pointer;
-  background-color: var(--tab-hover-bg);
-  color: var(--main-text-color);
 }
-.side-bar__tab--profile {
-  color: var(--main-text-color);
+.sidebar__tab:hover, .sidebar__tab--active {
+  background-color: var(--grey-hover);
+  color: var(--white-primary);
 }
-.side-bar__tab-icon {
+.sidebar__tab--profile {
+  color: var(--white-primary);
+}
+.sidebar__tab-icon {
   width: 2.5rem;
   height: 2.5rem;
   flex: 0 0 auto;
 }
-.side-bar__tab-icon svg {
+.sidebar__tab-icon svg {
   width: 100%;
   height: 100%;
   fill: var(--sidebar-text-color);
 }
-.side-bar__tab-icon--profile {
+.sidebar__tab-icon--profile {
   border-radius: 0.4rem;
   overflow: hidden;
   background-color: #464646;
 }
-.side-bar__tab-icon--small {
-  width: 2rem;
+.sidebar__tab-icon--small {
+  width: 1.7rem;
   height: 1.7rem;
 }
-.side-bar__tab-label {
-  transform: translateY(1px);
+.sidebar__tab-icon--small:hover {
+  transform: scale(1.3);
 }
-.side-bar__tab-label--profile {
+.sidebar__tab-label {
+  transform: translateY(1px);
+  flex: 1;
+}
+.sidebar__tab-label--profile {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.sidebar-profile-dropdown {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  z-index: 100;
+  background-color: var(--task-dropdown-menu-bg);
+  border-radius: 1.2rem;
+  overflow: hidden;
+  padding: 1rem 1.5rem;
+  font-size: 1.8rem;
+  width: 20rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  box-shadow: 8px 10px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.sidebar-profile-dropdown--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0px);
+}
+.sidebar-profile-dropdown__tab {
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  user-select: none;
+}
+.sidebar-profile-dropdown__tab:hover {
+  background-color: var(--grey-hover);
+  color: var(--white-primary);
 }
 
 .tasks-content {
@@ -178,7 +225,7 @@ body {
   height: 100%;
 }
 .todo-item__kebab-menu:hover {
-  background: var(--tab-hover-bg);
+  background: var(--grey-hover);
   border-radius: 4px;
 }
 .todo-item__dropdown-menu {
@@ -186,16 +233,27 @@ body {
   z-index: 100;
   font-size: 1.8rem;
   padding: 1.2rem;
-  background-color: #3c3b3b;
-  border-radius: 6px;
   min-width: 13.5rem;
+  background-color: var(--task-dropdown-menu-bg);
+  border-radius: 0.6rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  box-shadow: 8px 10px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.todo-item__dropdown-menu--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0px);
 }
 .todo-item__dropdown-menu--edit, .todo-item__dropdown-menu--delete {
   padding: 0.8rem;
   cursor: pointer;
+  user-select: none;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -214,6 +272,7 @@ body {
 
 .add-task-button {
   cursor: pointer;
+  user-select: none;
   width: fit-content;
   height: 4rem;
   padding: 0.4rem;

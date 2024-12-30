@@ -1,3 +1,5 @@
+@use "../utils/mixins";
+
 .tasks-content {
     padding: 12rem 15% 6rem 25%;
     font-size: 3rem;
@@ -66,7 +68,7 @@
             appearance: checkbox;
         }
     }
-    
+
     &__text-input {
         all: unset;
     }
@@ -89,7 +91,7 @@
         }
 
         &:hover {
-            background: var(--tab-hover-bg);
+            background: var(--grey-hover);
             border-radius: 4px;
         }
     }
@@ -99,16 +101,24 @@
         z-index: 100;
         font-size: 1.8rem;
         padding: 1.2rem;
-        background-color: #3c3b3b;
-        border-radius: 6px;
         min-width: 13.5rem;
+        background-color: var(--task-dropdown-menu-bg);
+        border-radius: .6rem;
         display: flex;
         flex-direction: column;
         gap: .4rem;
 
+        @include mixins.shadowElevation;
+        @include mixins.dropdownInitial;
+
+        &--open {
+            @include mixins.dropdownAppear;
+        }
+
         &--edit, &--delete {
             padding: .8rem;
             cursor: pointer;
+            user-select: none;
             border-radius: 4px;
             display: flex;
             align-items: center;
@@ -135,6 +145,7 @@
 
 .add-task-button {
     cursor: pointer;
+    user-select: none;
     width: fit-content;
     height: 4rem;
     padding: .4rem;

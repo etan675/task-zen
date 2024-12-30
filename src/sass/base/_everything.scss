@@ -1,10 +1,12 @@
 :root {
     // colors
-    --content-bg-color: #181818;
-    --sidebar-bg-color: #1D1D1D;
-    --main-text-color: #D3D3D3;
-    --tab-hover-bg: rgba(95, 94, 94, 0.3);
+    --black-primary: #181818;
+    --grey-primary: #1D1D1D;
+    --white-primary: #D3D3D3;
+    
+    --grey-hover: rgba(95, 94, 94, 0.3);
     --sidebar-text-color: #909090;
+    --task-dropdown-menu-bg: #242424;
 }
 
 * {
@@ -20,8 +22,8 @@ html {
 body {
     width: 100vw;
     height: 100vh;
-    background-color: var(--content-bg-color);
-    color: var(--main-text-color);
+    background-color: var(--black-primary);
+    color: var(--white-primary);
     overflow: hidden;
     margin: 0;
     font-family: sans-serif;

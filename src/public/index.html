@@ -10,44 +10,49 @@
   </head>
   <body>
     <div class="page">
-      <div class="side-bar-layout">
-        <div class="side-bar">
-          <header class="side-bar__tab side-bar__tab--profile">
-            <div class="side-bar__tab-icon side-bar__tab-icon--profile">
+      <div class="sidebar-layout">
+        <div class="sidebar">
+          <header id="sidebarProfileTab" class="sidebar__tab sidebar__tab--profile">
+            <div class="sidebar__tab-icon sidebar__tab-icon--profile">
               <!-- placeholder -->
               <div style="font-size: 16px; height: 100%; display: flex; align-items: center; justify-content: center;">E</div>
             </div>
-            <span class="side-bar__tab-label side-bar__tab-label--profile" title="Eric Tang's Space">Eric Tang's Space</span>
-            <div class="side-bar__tab-icon side-bar__tab-icon--small">
+            <span class="sidebar__tab-label sidebar__tab-label--profile" title="Eric Tang's Space">Eric Tang's Space</span>
+            <div class="sidebar__tab-icon sidebar__tab-icon--small">
               <svg width="64px" height="64px" fill="#000">
                 <use xlink:href="sprites.svg#down-arrow"></use>
               </svg>
             </div>
           </header>
-          <div class="side-bar__tabs-container">
-            <div class="side-bar__tab">
-              <div class="side-bar__tab-icon">
+          <div class="sidebar-profile-dropdown">
+            <div class="sidebar-profile-dropdown__tab">
+              Log out
+            </div>
+          </div>
+          <div class="sidebar__tabs-container">
+            <div class="sidebar__tab">
+              <div class="sidebar__tab-icon">
                 <svg style="transform: scale(1.15);" width="64px" height="64px" fill="#000">
                   <use xlink:href="sprites.svg#home-icon"></use>
                 </svg>
               </div>
-              <span class="side-bar__tab-label">Home</span>
+              <span class="sidebar__tab-label">Home</span>
             </div>
-            <div class="side-bar__tab">
-              <div class="side-bar__tab-icon">
+            <div class="sidebar__tab sidebar__tab--active">
+              <div class="sidebar__tab-icon">
                 <svg width="64px" height="64px" fill="#000">
                   <use xlink:href="sprites.svg#tasks-icon"></use>
                 </svg>
               </div>
-              <span class="side-bar__tab-label">Tasks</span>
+              <span class="sidebar__tab-label">Tasks</span>
             </div>
-            <div class="side-bar__tab">
-              <div class="side-bar__tab-icon">
+            <div class="sidebar__tab">
+              <div class="sidebar__tab-icon">
                 <svg width="64px" height="64px" fill="#000">
                   <use xlink:href="sprites.svg#projects-icon"></use>
                 </svg>
               </div>
-              <span class="side-bar__tab-label">Projects</span>
+              <span class="sidebar__tab-label">Projects</span>
             </div>
           </div>
         </div>
@@ -72,8 +77,7 @@
         </main>
       </div>
     </div>  
-
-    <!-- todo item templates -->
+    <!-- todo item template -->
     <template id="todo-item-template">
       <div class="todo-item-template-wrapper">
         <div class="todo-item-container">
@@ -84,14 +88,13 @@
             </label>
             <input class="todo-item__text-input hidden" type="text" disabled />
           </div>
-
           <div class="todo-item__kebab-menu-container">
             <div class="todo-item__kebab-menu">
               <svg width="30px" height="30px">
                 <use xlink:href="sprites.svg#kebab-menu-icon"></use>
               </svg>
             </div>
-            <div class="todo-item__dropdown-menu hidden">
+            <div class="todo-item__dropdown-menu">
                 <div class="todo-item__dropdown-menu--edit">
                   <span>Edit</span>
                   <svg style="padding: 2px;" width="64px" height="64px">
