@@ -19,46 +19,32 @@
             </div>
             <span class="side-bar__tab-label side-bar__tab-label--profile" title="Eric Tang's Space">Eric Tang's Space</span>
             <div class="side-bar__tab-icon side-bar__tab-icon--small">
-              <svg width="64px" height="64px" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000">
-                <g id="SVGRepo_bgCarrier" stroke-width="0" />
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-                <g id="SVGRepo_iconCarrier">
-                    <path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" />
-                </g>
+              <svg width="64px" height="64px" fill="#000">
+                <use xlink:href="sprites.svg#down-arrow"></use>
               </svg>
             </div>
           </header>
           <div class="side-bar__tabs-container">
             <div class="side-bar__tab">
               <div class="side-bar__tab-icon">
-                <svg style="transform: scale(1.15);" width="64px" height="64px" viewBox="0 0 24 24" fill="#909090">
-                  <g id="SVGRepo_iconCarrier">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M21.4498 10.275L11.9998 3.1875L2.5498 10.275L2.9998 11.625H3.7498V20.25H20.2498V11.625H20.9998L21.4498 10.275ZM5.2498 18.75V10.125L11.9998 5.0625L18.7498 10.125V18.75H14.9999V14.3333L14.2499 13.5833H9.74988L8.99988 14.3333V18.75H5.2498ZM10.4999 18.75H13.4999V15.0833H10.4999V18.75Z" />
-                  </g>
+                <svg style="transform: scale(1.15);" width="64px" height="64px" fill="#000">
+                  <use xlink:href="sprites.svg#home-icon"></use>
                 </svg>
               </div>
               <span class="side-bar__tab-label">Home</span>
             </div>
             <div class="side-bar__tab">
               <div class="side-bar__tab-icon">
-                <svg width="64px" height="64px" viewBox="0 0 512 512" fill="#909090">
-                  <g id="SVGRepo_iconCarrier">
-                      <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">
-                          <g id="Combined-Shape" transform="translate(70.530593, 46.125620)">
-                              <path d="M185.469407,39.207713 L356.136074,39.207713 L356.136074,81.8743797 L185.469407,81.8743797 L185.469407,39.207713 Z M185.469407,188.541046 L356.136074,188.541046 L356.136074,231.207713 L185.469407,231.207713 L185.469407,188.541046 Z M185.469407,337.87438 L356.136074,337.87438 L356.136074,380.541046 L185.469407,380.541046 L185.469407,337.87438 Z M119.285384,-7.10542736e-15 L144.649352,19.5107443 L68.6167605,118.353113 L2.84217094e-14,58.3134476 L21.0721475,34.2309934 L64.0400737,71.8050464 L119.285384,-7.10542736e-15 Z M119.285384,149.333333 L144.649352,168.844078 L68.6167605,267.686446 L2.84217094e-14,207.646781 L21.0721475,183.564327 L64.0400737,221.13838 L119.285384,149.333333 Z M119.285384,298.666667 L144.649352,318.177411 L68.6167605,417.01978 L2.84217094e-14,356.980114 L21.0721475,332.89766 L64.0400737,370.471713 L119.285384,298.666667 Z"></path>
-                          </g>
-                      </g>
-                  </g>
+                <svg width="64px" height="64px" fill="#000">
+                  <use xlink:href="sprites.svg#tasks-icon"></use>
                 </svg>
               </div>
               <span class="side-bar__tab-label">Tasks</span>
             </div>
             <div class="side-bar__tab">
               <div class="side-bar__tab-icon">
-                <svg width="64px" height="64px" viewBox="0 0 24 24" fill="#909090">
-                  <g id="SVGRepo_iconCarrier">
-                      <path d="M17 5V3H7v2H1v16h22V5zM8 4h8v1H8zm14 16H2V10h20zm0-11H2V6h20z" />
-                  </g>
+                <svg width="64px" height="64px" fill="#000">
+                  <use xlink:href="sprites.svg#projects-icon"></use>
                 </svg>
               </div>
               <span class="side-bar__tab-label">Projects</span>
@@ -74,8 +60,8 @@
           <section class="tasks-content__main">
             <div class="todo-list"></div>
             <div class="add-task-button">
-                <svg width="97" height="98" viewBox="0 0 97 98" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M48.5002 30.2V67.8M29.8999 49.0001H67.1002M95 49.0001C95 74.9575 74.1812 96 48.5002 96C22.8188 96 2 74.9575 2 49.0001C2 23.0426 22.8188 2 48.5002 2C74.1812 2 95 23.0426 95 49.0001Z" stroke="white" stroke-width="3.25333" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg width="97" height="98">
+                  <use xlink:href="sprites.svg#new-task-icon"></use>
                 </svg>
                 <span>New task</span>
             </div>
@@ -101,40 +87,21 @@
 
           <div class="todo-item__kebab-menu-container">
             <div class="todo-item__kebab-menu">
-              <svg width="30px" height="30px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" stroke="#B0B0B0">
-                <g id="SVGRepo_bgCarrier" stroke-width="0" />
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-                <g id="SVGRepo_iconCarrier">
-                    <title>Kebab-Menu</title>
-                    <g id="Kebab-Menu" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <path d="M12,6 C12.5522847,6 13,5.55228475 13,5 C13,4.44771525 12.5522847,4 12,4 C11.4477153,4 11,4.44771525 11,5 C11,5.55228475 11.4477153,6 12,6 Z"
-                                    id="shape-03" stroke-width="2" stroke-linecap="round"
-                                    stroke-dasharray="0,0"> </path>
-                            <path d="M12,13 C12.5522847,13 13,12.5522847 13,12 C13,11.4477153 12.5522847,11 12,11 C11.4477153,11 11,11.4477153 11,12 C11,12.5522847 11.4477153,13 12,13 Z"
-                                    id="shape-03" stroke-width="2" stroke-linecap="round"
-                                    stroke-dasharray="0,0"> </path>
-                            <path d="M12,20 C12.5522847,20 13,19.5522847 13,19 C13,18.4477153 12.5522847,18 12,18 C11.4477153,18 11,18.4477153 11,19 C11,19.5522847 11.4477153,20 12,20 Z"
-                                    id="shape-03" stroke-width="2" stroke-linecap="round"
-                                    stroke-dasharray="0,0"> </path>
-                    </g>
-                </g>
+              <svg width="30px" height="30px">
+                <use xlink:href="sprites.svg#kebab-menu-icon"></use>
               </svg>
             </div>
             <div class="todo-item__dropdown-menu hidden">
                 <div class="todo-item__dropdown-menu--edit">
                   <span>Edit</span>
-                  <svg style="padding: 2px;" width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                    <g id="SVGRepo_iconCarrier"> <path d="M21.2799 6.40005L11.7399 15.94C10.7899 16.89 7.96987 17.33 7.33987 16.7C6.70987 16.07 7.13987 13.25 8.08987 12.3L17.6399 2.75002C17.8754 2.49308 18.1605 2.28654 18.4781 2.14284C18.7956 1.99914 19.139 1.92124 19.4875 1.9139C19.8359 1.90657 20.1823 1.96991 20.5056 2.10012C20.8289 2.23033 21.1225 2.42473 21.3686 2.67153C21.6147 2.91833 21.8083 3.21243 21.9376 3.53609C22.0669 3.85976 22.1294 4.20626 22.1211 4.55471C22.1128 4.90316 22.0339 5.24635 21.8894 5.5635C21.7448 5.88065 21.5375 6.16524 21.2799 6.40005V6.40005Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M11 4H6C4.93913 4 3.92178 4.42142 3.17163 5.17157C2.42149 5.92172 2 6.93913 2 8V18C2 19.0609 2.42149 20.0783 3.17163 20.8284C3.92178 21.5786 4.93913 22 6 22H17C19.21 22 20 20.2 20 18V13" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                  <svg style="padding: 2px;" width="64px" height="64px">
+                    <use xlink:href="sprites.svg#edit-icon"></use>
                   </svg>
                 </div>
                 <div class="todo-item__dropdown-menu--delete">
                   <span>Delete</span>
-                  <svg width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                    <g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M14 11V17" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M4 7H20" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                  <svg width="64px" height="64px">
+                    <use xlink:href="sprites.svg#bin-icon"></use>
                   </svg>
                 </div>
             </div>
