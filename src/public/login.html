@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TaskZen</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body class="login-page">
+    <main>
+        <div class="form-container">
+            <form class="login-form" method="POST" action="/login">
+                <header class="login-form__header">
+                    <div class="login-form__header--main">Think it. Track it.</div>
+                    <div class="login-form__header--sub">Log in to your TaskZen account</div>
+                </header>
+                <div class="login-form__separator"></div>
+                <input class="login-form__input" type="email" name="loginEmail" id="loginEmail" required placeholder="Enter your email...">
+                <input class="login-form__input" type="password" name="loginPassword" id="loginPassword" required placeholder="Enter your password...">
+                <button class="login-form__button">Continue</button>
+            </form>
+        </div>
+    </main>
+</body>
+<script src="loginScript.js"></script>
+</html>
