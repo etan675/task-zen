@@ -1,9 +1,9 @@
-### Todo app
+### TaskZen 
 
-A full stack Todo App, style inspired by Notion
+A full stack task tracking app.
 
 
-### Built with:
+### Technologies:
 
 - HTML, CSS, JavaScript
 - Nodejs (TypeScript, Express)
@@ -12,9 +12,11 @@ A full stack Todo App, style inspired by Notion
 
 ### Motivation:
 
-This is a learning project, the goal was to build a full stack CRUD app without using any frameworks (and also make it look nice).
+To build a professional full stack web app (CRUD) without using any frameworks.
 
-After 2.5 years of working, it feels almost impossible to think in anything but frameworks and internal tools. So I wanted to get away from all that for a bit and re-visit the details and fundamentals with this project, and what better way to do that than a simple and useful todo app!
+Style is inspired by my favourite productivity tool Notion.
+
+After 2.5 years of working, it felt hard to think in anything but frameworks and internal tools. I wanted to get away from all that for this project and re-visit the details and fundamentals of web development, and what better way to do that than a simple and useful to-do style app!
 
 
 ### URL:
