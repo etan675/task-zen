@@ -49,7 +49,6 @@ body {
   background-color: var(--grey-primary);
   padding: 2rem 1.5rem;
   font-size: 2rem;
-  line-height: 1;
   color: var(--sidebar-text-color);
   border-right: 1px solid #343434;
   box-shadow: 2px 0px 4px rgba(6, 6, 6, 0.1);
@@ -84,23 +83,27 @@ body {
 .sidebar__tab-icon svg {
   width: 100%;
   height: 100%;
-  fill: var(--sidebar-text-color);
+  fill: currentColor;
 }
 .sidebar__tab-icon--profile {
   border-radius: 0.4rem;
   overflow: hidden;
   background-color: #464646;
 }
-.sidebar__tab-icon--small {
+.sidebar__tab-icon--down-chevron {
   width: 1.7rem;
   height: 1.7rem;
 }
-.sidebar__tab-icon--small:hover {
+.sidebar__tab-icon--down-chevron svg {
+  fill: var(--sidebar-text-color);
+}
+.sidebar__tab-icon--down-chevron:hover {
   transform: scale(1.3);
 }
 .sidebar__tab-label {
   transform: translateY(1px);
   flex: 1;
+  line-height: 1.5;
 }
 .sidebar__tab-label--profile {
   white-space: nowrap;
@@ -316,21 +319,22 @@ body {
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
+  top: 40%;
 }
 
 .login-form {
-  width: 65rem;
-  height: 65rem;
+  width: 42rem;
   color: var(--black-primary);
   border-radius: 1.2rem;
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 2rem;
 }
 .login-form__header {
   font-size: 3rem;
+  white-space: nowrap;
 }
 .login-form__header--main {
   font-weight: bold;
@@ -342,12 +346,13 @@ body {
 }
 .login-form__separator {
   height: 0.5px;
-  width: 50%;
+  width: 70%;
+  align-self: center;
   background-color: #cacaca;
   margin: 1.5rem 0;
 }
 .login-form__input {
-  width: 70%;
+  width: 100%;
   padding: 1.5rem 2rem;
   border-radius: 0.8rem;
   border: 1px solid #929292;
@@ -359,7 +364,7 @@ body {
   outline: rgb(255, 0, 0) auto 1px;
 }
 .login-form__button {
-  width: 70%;
+  width: 100%;
   padding: 1rem 2rem;
   background: linear-gradient(to right, #3ca4ff, #006FD1);
   color: white;
@@ -369,7 +374,7 @@ body {
 }
 .login-form__button:active {
   border: 1px solid black;
-  transform: translateY(1px);
+  transform: scale(1.01);
 }
 
 .hidden {

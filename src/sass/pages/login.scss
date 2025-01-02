@@ -13,21 +13,22 @@
 
 .form-container {
     @include mixins.centerAbsolute;
+    top: 40%;
 }
 
 .login-form {
-    width: 65rem;
-    height: 65rem;
+    width: 42rem;
     color: var(--black-primary);
     border-radius: 1.2rem;
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 2rem;
 
     &__header {
         font-size: 3rem;
+        white-space: nowrap;
 
         &--main {
             font-weight: bold;
@@ -42,13 +43,14 @@
 
     &__separator {
         height: .5px;
-        width: 50%;
+        width: 70%;
+        align-self: center;
         background-color: #cacaca;
         margin: 1.5rem 0;
     }
 
     &__input {
-        width: 70%;
+        width: 100%;
         padding: 1.5rem 2rem;
         border-radius: .8rem;
         border: 1px solid #929292;
@@ -65,7 +67,7 @@
     }
 
     &__button {
-        width: 70%;
+        width: 100%;
         padding: 1rem 2rem;
         background: linear-gradient(to right,  #3ca4ff, #006FD1);
         color: white;
@@ -75,7 +77,7 @@
 
         &:active {
             border: 1px solid black;
-            transform: translateY(1px);
+            transform: scale(1.01);
         }
     }
 }

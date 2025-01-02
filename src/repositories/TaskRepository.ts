@@ -1,4 +1,4 @@
-import TaskRepositoryInterface from "../services/repository-interfaces/TaskRepositoryInterface";
+import TaskRepositoryInterface from "../core/repository-interfaces/TaskRepositoryInterface";
 import { Pool } from "pg";
 import { TaskDataContract } from "../types/data-contracts/definitions";
 import { TaskUpdateSchema } from "../types/definitions";
