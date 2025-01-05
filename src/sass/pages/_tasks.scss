@@ -1,20 +1,30 @@
 @use "../utils/mixins";
 
+.tasks-page {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
 .tasks-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    min-width: 40rem;
     padding: 12rem 15% 6rem 25%;
     font-size: 3rem;
 
     &__header {
-        display: flex;
-        align-items: center;
         font-size: 4rem;
     }
 
     &__main {
+        flex: 1;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         gap: 2rem;
-        margin-top: 3rem;
     }
 }
 
@@ -22,23 +32,19 @@
     overflow: auto;
 }
 
-.todo-item-template-wrapper {
-    width: 100%;
-}
-
-.todo-item-container {
+.todo-item {
     display: flex;
     width: 100%;
     align-items: center;
     justify-content: space-between;
-}
 
-.todo-item {
-    padding: .8rem;
-    display: flex;
-    gap: 1.2rem;
+    &__content-container {
+        padding: .8rem;
+        display: flex;
+        gap: 1.2rem;
+    }
 
-    &__label {
+    &__content {
         cursor: pointer;
         display: flex;
         gap: 1.2rem;
@@ -73,74 +79,70 @@
         all: unset;
     }
 
-    &__kebab-menu-container {
+    &__kebab-menu {
         width: 4rem;
         height: 4rem;
         cursor: pointer;
         margin-right: .2rem;
-    }
-
-    &__kebab-menu {
-        width: 100%;
-        height: 100%;
         padding: .4rem;
+        transition: background .2s;
     
         svg {
             width: 100%;
             height: 100%;
         }
-
+    
         &:hover {
             background: var(--grey-hover);
             border-radius: 4px;
         }
     }
 
-    &__dropdown-menu {
+    &__dropdown {
         position: fixed;
         z-index: 100;
         font-size: 1.8rem;
         padding: 1.2rem;
         min-width: 13.5rem;
-        background-color: var(--task-dropdown-menu-bg);
+        background-color: #343434;
         border-radius: .6rem;
         display: flex;
         flex-direction: column;
         gap: .4rem;
-
+    
         @include mixins.shadowElevation;
         @include mixins.dropdownInitial;
-
+    
         &--open {
             @include mixins.dropdownAppear;
         }
-
-        &--edit, &--delete {
-            padding: .8rem;
-            cursor: pointer;
-            user-select: none;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        
-            span {
-                padding: 0 .4rem;
-            }
-        
-            svg {
-                width: 2.5rem;
-                height: 2.5rem;
-            }
-
-            &:hover {
-                background: rgba(136, 135, 135, 0.3);
-            }
-        }
-
     }
 
-    // ...
+    &__dropdown-edit-button, &__dropdown-delete-button {
+        @include mixins.buttonReset;
+    
+        padding: .8rem;
+        cursor: pointer;
+        user-select: none;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background .2s;
+    
+        span {
+            padding: 0 .4rem;
+        }
+    
+        svg {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        &:hover {
+            background: rgba(136, 135, 135, 0.3);
+        }
+    }
 }
 
 .add-task-button {
@@ -165,4 +167,114 @@
     input {
         all: unset;
     };
+}
+
+.tasks-sidebar {
+    width: 33rem;
+    min-width: 24rem;
+    height: 100%;
+    background-color: var(--dark-grey-bg);
+    padding: 2rem 1.5rem;
+    font-size: 2rem;
+    color: var(--grey-text);
+    border-right: 1px solid #343434;
+    box-shadow: 2px 0px 4px rgba(6, 6, 6, .1);
+
+    &__tabs-container {
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: .4rem;
+    }
+
+    &__tab {
+        padding: .8rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-radius: .6rem;
+        user-select: none;
+        cursor: pointer;
+        transition: background .2s;
+
+        &:hover, &--active {
+            background-color: var(--grey-hover);
+            color: var(--white-text);
+        }
+
+        &--head {
+            color: var(--white-text);
+        }
+    }
+
+    &__tab-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        flex: 0 0 auto;
+        fill: currentColor;
+    }
+
+    &__tab-label {
+        // makes alignment look better
+        transform: translateY(1px);
+        flex: 1;
+        line-height: 1.5;
+
+        @include mixins.clippableText;
+    }
+
+    &__profile-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        flex: 0 0 auto;
+        fill: currentColor;
+        border-radius: .4rem;
+        overflow: hidden;
+        background-color: #464646;
+    }
+
+    &__down-chevron {
+        width: 1.7rem;
+        height: 1.7rem;
+        fill: var(--grey-text);
+
+        &:hover {
+            transform: scale(1.3);
+        }
+    }
+}
+
+.tasks-sidebar-profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    z-index: 100;
+    background-color: #272727;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    padding: 1rem 1.5rem;
+    font-size: 1.8rem;
+    width: 20rem;
+
+    @include mixins.dropdownInitial;
+    @include mixins.shadowElevation;
+
+    &--open {
+        @include mixins.dropdownAppear;
+    }
+    
+    &__tab {
+        padding: .8rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-radius: .6rem;
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+            background-color: var(--grey-hover);
+            color: var(--white-text);
+        }
+    }
 }

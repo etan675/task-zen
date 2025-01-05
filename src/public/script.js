@@ -5,8 +5,8 @@ const newTaskForm = document.querySelector(".new-task-form");
 const newTaskInput = document.getElementById('newTaskInput');
 const addTaskButton = document.querySelector(".add-task-button");
 const todoList = document.querySelector(".todo-list");
-const sidebarProfileTab = document.querySelector('.sidebar__tab--profile');
-const sidebarTabs = document.querySelectorAll('.sidebar__tab');
+const sidebarProfileTab = document.getElementById('tasksSidebarProfileTab');
+const sidebarTabs = document.querySelectorAll('.tasks-sidebar__tab');
 
 // helpers
 const isDisplayed = (el) => {
@@ -48,15 +48,15 @@ const handleDisplayTasks = async () => {
         tasks.forEach((task) => {
             const todoItemClone = template.content.cloneNode(true);
 
-            const container =  todoItemClone.querySelector('.todo-item-container');
+            const container = todoItemClone.querySelector('.todo-item');
             const checkboxInput = todoItemClone.querySelector('.todo-item__checkbox');
             const span = todoItemClone.querySelector('.todo-item__text');
             const textInput = todoItemClone.querySelector('.todo-item__text-input');
 
             const kebabMenu = todoItemClone.querySelector('.todo-item__kebab-menu');
-            const dropdown = todoItemClone.querySelector('.todo-item__dropdown-menu');
-            const dropdownEditButton = todoItemClone.querySelector('.todo-item__dropdown-menu--edit');
-            const dropdownDeleteButton = todoItemClone.querySelector('.todo-item__dropdown-menu--delete');
+            const dropdown = todoItemClone.querySelector('.todo-item__dropdown');
+            const dropdownEditButton = todoItemClone.querySelector('.todo-item__dropdown-edit-button');
+            const dropdownDeleteButton = todoItemClone.querySelector('.todo-item__dropdown-delete-button');
 
             container.dataset.id = task.id;
 
@@ -71,7 +71,7 @@ const handleDisplayTasks = async () => {
 
             kebabMenu.onclick = handleKebabMenuClick;
 
-            dropdown.onclick = handleKebabMenuDropdownClick;
+            dropdown.onclick = handleTodoItemDropdownClick;
             dropdownEditButton.onclick = handleShowTaskEdit;
             dropdownDeleteButton.onclick = handleTaskDelete;
 
@@ -96,8 +96,8 @@ const handleCreateNewTask = async (e) => {
 
 const handleCheckboxChange = async (e) => {
     const checkbox = e.target;
-    const todoItemContainer = checkbox.closest('.todo-item-container');
-    const taskId = todoItemContainer.dataset.id;
+    const todoItem = checkbox.closest('.todo-item');
+    const taskId = todoItem.dataset.id;
 
     // disabled when waiting for query response
     checkbox.disabled = true;
@@ -113,38 +113,44 @@ const handleKebabMenuClick = (e) => {
     e.stopPropagation();
 
     const kebabMenu = e.currentTarget;
-    const kebabMenuContainer = kebabMenu.parentNode;
-    const dropdown = kebabMenuContainer.querySelector('.todo-item__dropdown-menu');
+    const todoItem = kebabMenu.closest('.todo-item');
+    const dropdown = todoItem.querySelector('.todo-item__dropdown');
 
-    dropdown.classList.toggle('todo-item__dropdown-menu--open');
+    if (!dropdown.classList.contains('todo-item__dropdown--open')) {
+        const rect = kebabMenu.getBoundingClientRect();
 
-    const rect = kebabMenuContainer.getBoundingClientRect();
+        // align with kebab menu
+        dropdown.style.top = `${rect.bottom}px`;
+        dropdown.style.left = `${rect.left + window.scrollX + 17}px`;
+    
+        dropdown.classList.add('todo-item__dropdown--open');
 
-    // align with kebab menu
-    dropdown.style.left = `${rect.left + window.scrollX + 17}px`;
+    } else {
+        dropdown.classList.remove('todo-item__dropdown--open');
+    }
 }
 
-const handleKebabMenuDropdownClick = (e) => {
+const handleTodoItemDropdownClick = (e) => {
     const dropdown = e.currentTarget;
 
-    dropdown.classList.remove('todo-item__dropdown-menu--open');
+    dropdown.classList.remove('todo-item__dropdown--open');
 }
 
-const handleKebabMenuDropdownOutsideClick = (e) => {
-    const kebabMenuDropdowns = document.querySelectorAll('.todo-item__dropdown-menu');
+const handleTodoItemDropdownOutsideClick = (e) => {
+    const openDropdowns = document.querySelectorAll('.todo-item__dropdown--open');
 
-    kebabMenuDropdowns.forEach((dropdown) => {
+    openDropdowns.forEach((dropdown) => {
         if (!dropdown.contains(e.target)) {
-            dropdown.classList.remove('todo-item__dropdown-menu--open');
+            dropdown.classList.remove('todo-item__dropdown--open');
         }
     });
 }
 
 const handleTaskDelete = async (e) => {
     const deleteButton = e.target;
-    const todoItemContainer = deleteButton.closest('.todo-item-container');
+    const todoItem = deleteButton.closest('.todo-item');
     
-    const taskId = todoItemContainer.dataset.id;
+    const taskId = todoItem.dataset.id;
 
     await deleteTask(taskId);
 
@@ -154,9 +160,9 @@ const handleTaskDelete = async (e) => {
 
 const handleShowTaskEdit = (e) => {
     const editButton = e.target;
-    const todoItemContainer = editButton.closest('.todo-item-container');
-    const todoText = todoItemContainer.querySelector('.todo-item__text');
-    const todoTextInput = todoItemContainer.querySelector('.todo-item__text-input');
+    const todoItem = editButton.closest('.todo-item');
+    const todoText = todoItem.querySelector('.todo-item__text');
+    const todoTextInput = todoItem.querySelector('.todo-item__text-input');
 
     if (!isDisplayed(todoTextInput)) {
         todoTextInput.disabled = false;
@@ -171,10 +177,10 @@ const handleShowTaskEdit = (e) => {
 
 const handleTodoTextInputBlur = async (e) => {
     const todoTextInput = e.target;
-    const todoItemContainer = todoTextInput.closest('.todo-item-container');
-    const todoText = todoItemContainer.querySelector('.todo-item__text');
+    const todoItem = todoTextInput.closest('.todo-item');
+    const todoText = todoItem.querySelector('.todo-item__text');
 
-    const taskId = todoItemContainer.dataset.id;
+    const taskId = todoItem.dataset.id;
 
     todoTextInput.disabled = true;
 
@@ -200,27 +206,27 @@ const handleSidebarProfileClick = (e) => {
 
     const profileTab = e.currentTarget;
     const rect = profileTab.getBoundingClientRect();
-    const dropdown = document.querySelector('.sidebar-profile-dropdown');
+    const dropdown = document.querySelector('.tasks-sidebar-profile-dropdown');
     
-    dropdown.classList.toggle('sidebar-profile-dropdown--open');
+    dropdown.classList.toggle('tasks-sidebar-profile-dropdown--open');
     // align with ride edge of profile tab
     dropdown.style.left = `${rect.right - dropdown.offsetWidth}px`;
 }
 
 const handleSidebarProfileDropdownOutsideClick = (e) => {
-    const dropdown = document.querySelector('.sidebar-profile-dropdown');
+    const dropdown = document.querySelector('.tasks-sidebar-profile-dropdown');
 
     if (!dropdown.contains(e.target)) {
-        dropdown.classList.remove('sidebar-profile-dropdown--open');
+        dropdown.classList.remove('tasks-sidebar-profile-dropdown--open');
     }
 }
 
 const handleSidebarTabClick = (e) => {
     const tab = e.currentTarget;
-    const activeTab = document.querySelector('.sidebar__tab--active');
+    const activeTab = document.querySelector('.tasks-sidebar__tab--active');
 
-    activeTab.classList.remove('sidebar__tab--active');
-    tab.classList.add('sidebar__tab--active');
+    activeTab.classList.remove('tasks-sidebar__tab--active');
+    tab.classList.add('tasks-sidebar__tab--active');
 }
 
 // event listeners
@@ -229,13 +235,13 @@ newTaskForm.addEventListener('submit', handleCreateNewTask);
 newTaskInput.addEventListener('blur', handleNewTaskInputBlur);
 sidebarProfileTab.addEventListener('click', handleSidebarProfileClick);
 sidebarTabs.forEach(tab => {
-    if (tab.id !== 'sidebarProfileTab') {
+    if (tab.id !== 'tasksSidebarProfileTab') {
         tab.addEventListener('click', handleSidebarTabClick);
     }
 })
 
 window.addEventListener('click', (e) => {
-    handleKebabMenuDropdownOutsideClick(e);
+    handleTodoItemDropdownOutsideClick(e);
     handleSidebarProfileDropdownOutsideClick(e);
 })
 

@@ -4,111 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Tasks</title>
+    <title>My Tasks &ndash; TaskZen</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
   </head>
   <body>
-    <div class="page">
-      <div class="sidebar-layout">
-        <div class="sidebar">
-          <header id="sidebarProfileTab" class="sidebar__tab sidebar__tab--profile">
-            <div class="sidebar__tab-icon sidebar__tab-icon--profile">
-              <!-- placeholder -->
-              <div style="font-size: 16px; height: 100%; display: flex; align-items: center; justify-content: center;">E</div>
-            </div>
-            <span class="sidebar__tab-label sidebar__tab-label--profile" title="Eric Tang's Space">Eric Tang's Space</span>
-            <div class="sidebar__tab-icon sidebar__tab-icon--down-chevron">
-              <svg width="64px" height="64px" fill="#000">
-                <use xlink:href="sprites.svg#down-arrow"></use>
-              </svg>
-            </div>
-          </header>
-          <div class="sidebar-profile-dropdown">
-            <div class="sidebar-profile-dropdown__tab">
-              Log out
-            </div>
+    <div class="tasks-page">
+      <div class="tasks-sidebar">
+        <header id="tasksSidebarProfileTab" class="tasks-sidebar__tab tasks-sidebar__tab--head">
+          <div class="tasks-sidebar__profile-icon">
+            <!-- placeholder -->
+            <div style="font-size: 16px; height: 100%; display: flex; align-items: center; justify-content: center;">E</div>
           </div>
-          <div class="sidebar__tabs-container">
-            <div class="sidebar__tab">
-              <div class="sidebar__tab-icon">
-                <svg style="transform: scale(1.15);" width="64px" height="64px" fill="#000">
-                  <use xlink:href="sprites.svg#home-icon"></use>
-                </svg>
-              </div>
-              <span class="sidebar__tab-label">Home</span>
-            </div>
-            <div class="sidebar__tab sidebar__tab--active">
-              <div class="sidebar__tab-icon">
-                <svg width="64px" height="64px" fill="#000">
-                  <use xlink:href="sprites.svg#tasks-icon"></use>
-                </svg>
-              </div>
-              <span class="sidebar__tab-label">Tasks</span>
-            </div>
-            <div class="sidebar__tab">
-              <div class="sidebar__tab-icon">
-                <svg width="64px" height="64px" fill="#000">
-                  <use xlink:href="sprites.svg#projects-icon"></use>
-                </svg>
-              </div>
-              <span class="sidebar__tab-label">Projects</span>
-            </div>
+          <span class="tasks-sidebar__tab-label" title="Eric Tang's Space">Eric Tang's Space</span>
+          <svg class="tasks-sidebar__down-chevron" width="64px" height="64px" fill="#000">
+            <use xlink:href="sprites.svg#down-arrow"></use>
+          </svg>
+        </header>
+        <div class="tasks-sidebar-profile-dropdown">
+          <div class="tasks-sidebar-profile-dropdown__tab">
+            Log out
+          </div>
+        </div>
+        <div class="tasks-sidebar__tabs-container">
+          <div class="tasks-sidebar__tab">
+            <svg class="tasks-sidebar__tab-icon" style="transform: scale(1.15);" width="64px" height="64px" fill="#000">
+              <use xlink:href="sprites.svg#home-icon"></use>
+            </svg>
+            <span class="tasks-sidebar__tab-label">Home</span>
+          </div>
+          <div class="tasks-sidebar__tab tasks-sidebar__tab--active">
+            <svg class="tasks-sidebar__tab-icon" width="64px" height="64px" fill="#000">
+              <use xlink:href="sprites.svg#tasks-icon"></use>
+            </svg>
+            <span class="tasks-sidebar__tab-label">Tasks</span>
+          </div>
+          <div class="tasks-sidebar__tab">
+            <svg class="tasks-sidebar__tab-icon" width="64px" height="64px" fill="#000">
+              <use xlink:href="sprites.svg#projects-icon"></use>
+            </svg>
+            <span class="tasks-sidebar__tab-label">Projects</span>
           </div>
         </div>
       </div>
-      <div class="content-layout">
-        <main class="tasks-content">
-          <header class="tasks-content__header">
-              <div>To dos</div>
-          </header>
-          <section class="tasks-content__main">
-            <div class="todo-list"></div>
-            <div class="add-task-button">
-                <svg width="97" height="98">
-                  <use xlink:href="sprites.svg#new-task-icon"></use>
-                </svg>
-                <span>New task</span>
-            </div>
-            <form class="new-task-form hidden">
-              <input id="newTaskInput" type="text" placeholder="New task" name="newTask" autocomplete="off"/>
-            </form>
-          </section>
-        </main>
-      </div>
+      <main class="tasks-content">
+        <header class="tasks-content__header">
+            <div>To dos</div>
+        </header>
+        <section class="tasks-content__main">
+          <div class="todo-list"></div>
+          <div class="add-task-button">
+              <svg width="64px" height="64px">
+                <use xlink:href="sprites.svg#new-task-icon"></use>
+              </svg>
+              <span>New task</span>
+          </div>
+          <form class="new-task-form hidden">
+            <input id="newTaskInput" type="text" placeholder="New task" name="newTask" autocomplete="off"/>
+          </form>
+        </section>
+      </main>
     </div>  
     <!-- todo item template -->
     <template id="todo-item-template">
-      <div class="todo-item-template-wrapper">
-        <div class="todo-item-container">
-          <div class="todo-item">
-            <label class="todo-item__label">
-              <input class="todo-item__checkbox" type="checkbox" />
-              <span class="todo-item__text"></span>
-            </label>
-            <input class="todo-item__text-input hidden" type="text" disabled />
-          </div>
-          <div class="todo-item__kebab-menu-container">
-            <div class="todo-item__kebab-menu">
-              <svg width="30px" height="30px">
-                <use xlink:href="sprites.svg#kebab-menu-icon"></use>
-              </svg>
-            </div>
-            <div class="todo-item__dropdown-menu">
-                <div class="todo-item__dropdown-menu--edit">
-                  <span>Edit</span>
-                  <svg style="padding: 2px;" width="64px" height="64px">
-                    <use xlink:href="sprites.svg#edit-icon"></use>
-                  </svg>
-                </div>
-                <div class="todo-item__dropdown-menu--delete">
-                  <span>Delete</span>
-                  <svg width="64px" height="64px">
-                    <use xlink:href="sprites.svg#bin-icon"></use>
-                  </svg>
-                </div>
-            </div>
-          </div>
+      <div class="todo-item">
+        <div class="todo-item__content-container">
+          <label class="todo-item__content">
+            <input class="todo-item__checkbox" type="checkbox" />
+            <span class="todo-item__text"></span>
+          </label>
+          <input class="todo-item__text-input hidden" type="text" disabled />
+        </div>
+        <div class="todo-item__kebab-menu">
+          <svg width="30px" height="30px">
+            <use xlink:href="sprites.svg#kebab-menu-icon"></use>
+          </svg>
+        </div>
+        <div class="todo-item__dropdown">
+          <button class="todo-item__dropdown-edit-button">
+            <span>Edit</span>
+            <svg style="padding: 2px;" width="64px" height="64px">
+              <use xlink:href="sprites.svg#edit-icon"></use>
+            </svg>
+          </button>
+          <button class="todo-item__dropdown-delete-button">
+            <span>Delete</span>
+            <svg width="64px" height="64px">
+              <use xlink:href="sprites.svg#bin-icon"></use>
+            </svg>
+          </button>
         </div>
       </div>
     </template> 
