@@ -10,18 +10,16 @@ class TaskRepository implements TaskRepositoryInterface {
         this.db = dbClient;
     }
 
-    async createTask(taskContent: string): Promise<TaskDataContract> {
+    async createTask(taskContent: string): Promise<TaskDataContract|undefined> {
         const query = 
             `INSERT INTO "Task" ("content", "checked") 
             VALUES ($1, $2) 
             RETURNING *;`;
-
-        const params = [taskContent, false];
         
-        const res = await this.db.query(query, params);
+        const res = await this.db.query(query, [taskContent, false]);
         const createdTask = res.rows[0];
 
-        return {
+        return createdTask && {
             id: createdTask.id,
             content: createdTask.content,
             checked: createdTask.checked
@@ -32,7 +30,6 @@ class TaskRepository implements TaskRepositoryInterface {
         const query = 'SELECT * FROM "Task" ORDER BY "id" ASC;'
 
         const res = await this.db.query(query);
-
         const tasks = res.rows.map(row => {
             return { 
                 id: row.id,
@@ -44,7 +41,7 @@ class TaskRepository implements TaskRepositoryInterface {
         return tasks;
     }
 
-    async editTask(id: number, updateFields: TaskUpdateSchema): Promise<TaskDataContract> {
+    async editTask(id: number, updateFields: TaskUpdateSchema): Promise<TaskDataContract|undefined> {
         const query = 
             `UPDATE "Task"
             SET
@@ -60,7 +57,7 @@ class TaskRepository implements TaskRepositoryInterface {
         const res = await this.db.query(query, [contentField, checkedField, id]);
         const editedTask = res.rows[0];
 
-        return { 
+        return editedTask && { 
             id: editedTask.id,
             content: editedTask.content,
             checked: editedTask.checked
@@ -73,7 +70,7 @@ class TaskRepository implements TaskRepositoryInterface {
         const res = await this.db.query(query, [id]);
         const deletedTask = res.rows[0];
 
-        return deletedTask.id;
+        return deletedTask?.id || 0;
     }
 }
 

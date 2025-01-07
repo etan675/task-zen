@@ -8,44 +8,38 @@ class TasksService {
         this.taskRepository = taskRepository;
     }
 
-    async createTask(newTask: string) {
-        try {
-            return await this.taskRepository.createTask(newTask);
+    async createTask(content: string) {
+        const createdTask = await this.taskRepository.createTask(content);
 
-        } catch (err) {
-            console.log(err.message);
+        if (!createdTask) {
             throw new Error('Failed to create task');
         }
+
+        return createdTask;
     }
 
     async getTasks() {
-        try {
-            return await this.taskRepository.getTasks();
-
-        } catch (err) {
-            console.log(err.message);
-            throw new Error('Failed to get tasks');
-        }
+        return await this.taskRepository.getTasks();
     }
 
     async editTask(id: number, updateFields: TaskUpdateSchema) {
-        try {
-            return await this.taskRepository.editTask(id, updateFields);
+        const editedTask = await this.taskRepository.editTask(id, updateFields);
 
-        } catch (err) {
-            console.log(err.message);
+        if (!editedTask) {
             throw new Error('Failed to edit task');
         }
+
+        return editedTask;
     }
 
     async deleteTask(id: number) {
-        try {
-            return this.taskRepository.deleteTask(id);
+        const deletedTaskId = await this.taskRepository.deleteTask(id);
 
-        } catch (err) {
-            console.log(err.message);
+        if (!deletedTaskId) {
             throw new Error('Failed to delete task');
         }
+
+        return deletedTaskId;
     }
 }
 

@@ -25,6 +25,10 @@ After 2.5 years of working, it felt hard to think in anything but frameworks and
 ### Todo features:
 
 - auth + demo account
+    - db schema: add userId key for task
+    - sessions
+    - auth middleware
+    - add userId clause for task queries
 - fix the build/run script for prod
 - host app on render (full stack)
 - project tracker (feature)

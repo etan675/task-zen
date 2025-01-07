@@ -9,8 +9,18 @@ class UserRepository implements UserRepositoryInterface {
         this.db = dbClient;
     }
 
-    async getByEmail(email: string): Promise<UserDataContract> {
-        throw new Error("Method not implemented.");
+    async getByEmail(email: string): Promise<UserDataContract|undefined> {
+        const query = `SELECT * FROM "User" WHERE "email" = $1;`;
+
+        const res = await this.db.query(query, [email]);
+        const user = res.rows[0];
+
+        return user && {
+            id: user.id,
+            email: user.email,
+            username: user.username,
+            password: user.password
+        };
     }
 }
 

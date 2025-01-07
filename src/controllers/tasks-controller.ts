@@ -1,16 +1,11 @@
 import { Request, Response } from "express";
-import { createTasksService } from "../initServices";
+import { createTasksService } from "../initservices";
 
 const taskService = createTasksService();
 
 const tasksController = async (req: Request, res: Response) => {
-    try {
-        const allTasks = await taskService.getTasks();
-        res.json(allTasks);
-
-    } catch (err) {
-        res.status(404).json({ error: err.message });
-    }
+    const allTasks = await taskService.getTasks();
+    res.json(allTasks);
 }
 
 const newTaskController = async (req: Request, res: Response) => {

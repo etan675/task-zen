@@ -1,5 +1,5 @@
 import UserRepositoryInterface from "./repository-interfaces/UserRepositoryInterface";
-import UserServiceInterface from "./service-Interfaces/UserSeriviceInterface";
+import UserServiceInterface from "./service-Interfaces/UserServiceInterface";
 
 class UserService implements UserServiceInterface {
     private userRepository: UserRepositoryInterface;
@@ -9,7 +9,7 @@ class UserService implements UserServiceInterface {
     }
 
     async getByEmail(email: string) {
-        return await this.userRepository.getByEmail(email);
+        return await this.userRepository.getByEmail(email.trim());
     }
 }
 

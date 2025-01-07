@@ -1,4 +1,4 @@
-import UserServiceInterface from "./service-Interfaces/UserSeriviceInterface";
+import UserServiceInterface from "./service-Interfaces/UserServiceInterface";
 
 class AuthService {
     private userService: UserServiceInterface;
@@ -7,11 +7,17 @@ class AuthService {
         this.userService = userService;
     }
 
-    authenticate(email: string, password: string) {
-        console.log('email: ', email);
-        console.log('password: ', password);
+    async authenticate(email: string, password: string) {
+        const user = await this.userService.getByEmail(email);
+        
+        if (!user) {
+            return false;            
+        }
 
-        return true;
+        return (
+            user.email === email &&
+            user.password === password
+        )
     }
 }
 
