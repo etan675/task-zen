@@ -2,8 +2,9 @@ import { TaskDataContract } from "../../types/data-contracts/definitions";
 import { TaskUpdateSchema } from "../../types/definitions";
 
 interface TaskRepositoryInterface {
-    createTask(task: string): Promise<TaskDataContract|undefined>,
-    getTasks(): Promise<TaskDataContract[]>,
+    createTask(userId: number, content: string): Promise<TaskDataContract|undefined>,
+    getTasks(userId: number): Promise<TaskDataContract[]>,
+    getTask(id: number): Promise<TaskDataContract|undefined>
     editTask(id: number, updateFields: TaskUpdateSchema): Promise<TaskDataContract|undefined>,
     deleteTask(id: number): Promise<number>,
 }

@@ -2,22 +2,24 @@
 
 import db from "./db/db";
 import TaskRepository from "./repositories/TaskRepository";
-import TasksService from "./core/TasksService";
+import TaskService from "./core/TaskService";
 import UserRepository from "./repositories/UserRepository";
 import UserService from "./core/UserService";
-import AuthService from "./core/AuthService";
+import AuthenticationService from "./core/AuthenticationService";
+import TaskAuthorisationService from "./core/TaskAuthorisationService";
 
 const createTasksService = () => {
     const taskRepository = new TaskRepository(db);
+    const taskAuth = new TaskAuthorisationService();
 
-    return new TasksService(taskRepository);
+    return new TaskService(taskRepository, taskAuth);
 }
 
 const createAuthService = () => {
     const userRepository = new UserRepository(db);
     const userService = new UserService(userRepository);
 
-    return new AuthService(userService);
+    return new AuthenticationService(userService);
 }
 
 export {

@@ -10,35 +10,56 @@ class TaskRepository implements TaskRepositoryInterface {
         this.db = dbClient;
     }
 
-    async createTask(taskContent: string): Promise<TaskDataContract|undefined> {
+    async createTask(userId: number, taskContent: string): Promise<TaskDataContract|undefined> {
         const query = 
-            `INSERT INTO "Task" ("content", "checked") 
-            VALUES ($1, $2) 
+            `INSERT INTO "Task" ("content", "checked", "userId") 
+            VALUES ($1, $2, $3)
             RETURNING *;`;
         
-        const res = await this.db.query(query, [taskContent, false]);
+        const res = await this.db.query(query, [taskContent, false, userId]);
         const createdTask = res.rows[0];
 
         return createdTask && {
             id: createdTask.id,
             content: createdTask.content,
-            checked: createdTask.checked
+            checked: createdTask.checked,
+            userId: createdTask.userId
         }
     }
 
-    async getTasks(): Promise<TaskDataContract[]> {
-        const query = 'SELECT * FROM "Task" ORDER BY "id" ASC;'
+    async getTasks(userId: number): Promise<TaskDataContract[]> {
+        const query = 
+            `SELECT * FROM "Task" 
+            WHERE "userId" = $1
+            ORDER BY "id" ASC`;
 
-        const res = await this.db.query(query);
+        const res = await this.db.query(query, [userId]);
         const tasks = res.rows.map(row => {
             return { 
                 id: row.id,
                 content: row.content,
-                checked: row.checked
+                checked: row.checked,
+                userId: row.userId
             };
         })
 
         return tasks;
+    }
+
+    async getTask(id: number): Promise<TaskDataContract|undefined> {
+        const query = 
+            `SELECT * FROM "Task" 
+            WHERE "id" = $1`;
+
+        const res = await this.db.query(query, [id]);
+        const task = res.rows[0];
+
+        return task && {
+            id: task.id,
+            content: task.content,
+            checked: task.checked,
+            userId: task.userId
+        }
     }
 
     async editTask(id: number, updateFields: TaskUpdateSchema): Promise<TaskDataContract|undefined> {
@@ -60,7 +81,8 @@ class TaskRepository implements TaskRepositoryInterface {
         return editedTask && { 
             id: editedTask.id,
             content: editedTask.content,
-            checked: editedTask.checked
+            checked: editedTask.checked,
+            userId: editedTask.userId
         };
     }
 

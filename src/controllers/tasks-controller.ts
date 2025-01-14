@@ -4,7 +4,8 @@ import { createTasksService } from "../initservices";
 const taskService = createTasksService();
 
 const tasksController = async (req: Request, res: Response) => {
-    const allTasks = await taskService.getTasks();
+    // TODO: actual user id
+    const allTasks = await taskService.getUserTasks(1);
     res.json(allTasks);
 }
 
@@ -12,7 +13,8 @@ const newTaskController = async (req: Request, res: Response) => {
     const { newTask } = req.body;
 
     try {
-        const createdTask = await taskService.createTask(newTask);
+        //TODO: actual user id
+        const createdTask = await taskService.createUserTask(1, newTask);
         res.json(createdTask);
 
     } catch {
@@ -25,7 +27,8 @@ const editTaskController = async (req: Request, res: Response) => {
     const fields = req.body;
 
     try {
-        const result = await taskService.editTask(parseInt(id), fields);
+        //TODO: actual user id  
+        const result = await taskService.editUserTask(parseInt(id), 1, fields);
         res.status(200).json(result);
 
     } catch {
@@ -37,7 +40,8 @@ const deleteTaskController = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     try {
-        const deletedId = await taskService.deleteTask(parseInt(id));
+        //TODO: actual user id  
+        const deletedId = await taskService.deleteUserTask(parseInt(id), 1);
         res.json({ deletedId });
 
     } catch {

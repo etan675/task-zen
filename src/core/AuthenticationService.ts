@@ -1,6 +1,6 @@
 import UserServiceInterface from "./service-Interfaces/UserServiceInterface";
 
-class AuthService {
+class AuthenticationService {
     private userService: UserServiceInterface;
 
     constructor(userService: UserServiceInterface) {
@@ -21,4 +21,4 @@ class AuthService {
     }
 }
 
-export default AuthService;
+export default AuthenticationService;

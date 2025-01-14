@@ -1,7 +1,8 @@
 type TaskDataContract = {
     id: number,
     content: string,
-    checked: boolean
+    checked: boolean,
+    userId: number,
 }
 
 type UserDataContract = {
