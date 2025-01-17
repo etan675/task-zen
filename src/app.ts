@@ -5,7 +5,9 @@ import taskRouter from './routes/tasks';
 import 'dotenv/config';
 import loginRouter from './routes/login';
 import { basePath } from './appConsts';
-import validateSession from './middleware/validateSession';
+import cookieParser from 'cookie-parser';
+import validateUserSession from './middleware/validateUserSession';
+
 const app = express();
 
 app.use(express.static(path.join(basePath, 'public')));
@@ -13,10 +15,11 @@ app.use(express.static(path.join(basePath, 'public')));
 // request parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // routes
 app.use('/', rootRouter);
-app.use('/tasks', validateSession, taskRouter);
+app.use('/tasks', validateUserSession, taskRouter);
 app.use('/login', loginRouter);
 
 // catch all middleware

@@ -9,18 +9,19 @@ class SessionRepository implements SessionRepositoryInterface {
         this.db = dbClient;
     }
 
-    async createSession(): Promise<SessionDataContract> {
+    async createSession(userId: number): Promise<SessionDataContract|undefined> {
         const query = `
-            INSERT INTO "Session"
-            DEFAULT VALUES 
+            INSERT INTO "Session" ("userId")
+            VALUES ($1)
             RETURNING *;
         `;
 
-        const res = await this.db.query(query);
+        const res = await this.db.query(query, [userId]);
         const session = res.rows[0];
 
         return session && {
-            id: session.id
+            id: session.id,
+            userId: session.userId
         }
     }
 
@@ -35,6 +36,21 @@ class SessionRepository implements SessionRepositoryInterface {
         const deletedId = res.rows[0]?.id;
 
         return deletedId || 0;
+    }
+
+    async getById(id: number): Promise<SessionDataContract|undefined> {
+        const query = `
+            SELECT * FROM "Session" 
+            WHERE "id" = $1;
+        `;
+
+        const res = await this.db.query(query, [id]);
+        const session = res.rows[0];
+
+        return session && {
+            id: session.id,
+            userId: session.userId
+        }
     }
 }
 

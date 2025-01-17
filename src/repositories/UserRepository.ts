@@ -18,9 +18,24 @@ class UserRepository implements UserRepositoryInterface {
         return user && {
             id: user.id,
             email: user.email,
-            username: user.username,
             password: user.password
         };
+    }
+
+    async getById(id: number): Promise<UserDataContract|undefined> {
+        const query = `
+            SELECT * FROM "User" 
+            WHERE "id" = $1;
+        `;
+
+        const res = await this.db.query(query, [id]);
+        const user = res.rows[0];
+
+        return user && {
+            id: user.id,
+            email: user.email,
+            password: user.password
+        }
     }
 }
 

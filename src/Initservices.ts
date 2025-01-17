@@ -38,5 +38,6 @@ const createSessionService = () => {
 export {
     createTasksService,
     createAuthService,
+    createUserService,
     createSessionService
 }

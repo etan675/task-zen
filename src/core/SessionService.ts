@@ -9,8 +9,8 @@ class SessionService implements SessionServiceInterface {
         this.sessionRepository = sessionRepository;
     }
 
-    async createSession(): Promise<SessionDataContract> {
-        const session = await this.sessionRepository.createSession();
+    async createUserSession(userId: number): Promise<SessionDataContract> {
+        const session = await this.sessionRepository.createSession(userId);
 
         if (!session) {
             throw new Error('Failed to create session');
@@ -28,6 +28,10 @@ class SessionService implements SessionServiceInterface {
         }
 
         return deletedSid;
+    }
+
+    async getById(sessionId: number) {
+        return await this.sessionRepository.getById(sessionId);
     }
 }
 

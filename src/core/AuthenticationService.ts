@@ -11,7 +11,7 @@ class AuthenticationService {
         const user = await this.userService.getByEmail(email);
         
         if (!user) {
-            return false;            
+            return false;
         }
 
         return (

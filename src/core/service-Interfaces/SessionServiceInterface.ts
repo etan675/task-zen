@@ -1,7 +1,7 @@
 import { SessionDataContract } from "../../types/data-contracts/definitions";
 
 interface SessionServiceInterface {
-    createSession(): Promise<SessionDataContract>
+    createUserSession(userId: number): Promise<SessionDataContract>
     destroySession(sid: number): Promise<number>
 }
 

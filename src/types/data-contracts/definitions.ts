@@ -8,12 +8,12 @@ type TaskDataContract = {
 type UserDataContract = {
     id: number,
     email: string,
-    username: string,
     password: string
 }
 
 type SessionDataContract = {
-    id: number
+    id: number,
+    userId: number
 }
 
 export {
