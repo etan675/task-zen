@@ -13,8 +13,6 @@ const handleLoginFormSubmit = async (e) => {
     const loginSuccess = await login(formData.get('email'), formData.get('password'));
     
     if (loginSuccess) {
-        //TODO: set session
-
         window.location.replace('/');
 
     } else {

@@ -6,6 +6,4 @@ const loginRouter = express.Router();
 loginRouter.get('/', loginController);
 loginRouter.post('/', loginPostController);
 
-export {
-    loginRouter
-};
+export default loginRouter;

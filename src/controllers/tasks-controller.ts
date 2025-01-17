@@ -1,9 +1,15 @@
 import { Request, Response } from "express";
 import { createTasksService } from "../initservices";
+import path from "path";
+import { basePath } from "../appConsts";
 
 const taskService = createTasksService();
 
-const tasksController = async (req: Request, res: Response) => {
+const taskPageController = (req: Request, res: Response) => {
+    res.sendFile(path.join(basePath, '/views/tasks.html'));
+}
+
+const getTasksController = async (req: Request, res: Response) => {
     // TODO: actual user id
     const allTasks = await taskService.getUserTasks(1);
     res.json(allTasks);
@@ -51,7 +57,8 @@ const deleteTaskController = async (req: Request, res: Response) => {
 
 export {
     newTaskController,
-    tasksController,
+    getTasksController as tasksController,
+    taskPageController,
     editTaskController,
     deleteTaskController
 }

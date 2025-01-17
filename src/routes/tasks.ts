@@ -1,9 +1,11 @@
 import express from 'express';
-import { deleteTaskController, editTaskController, newTaskController, tasksController } from '../controllers/tasks-controller';
+import { deleteTaskController, editTaskController, newTaskController, taskPageController, tasksController } from '../controllers/tasks-controller';
 
 const taskRouter = express.Router();
 
-taskRouter.get('/', tasksController);
+taskRouter.get('/', taskPageController);
+
+taskRouter.get('/all', tasksController);
 
 taskRouter.post('/new', newTaskController);
 

@@ -252,7 +252,7 @@ window.addEventListener('load', () => {
 // data fetching
 const getTasks = async () => {
     try {
-        const res = await fetch('/tasks');
+        const res = await fetch('/tasks/all');
 
         if (!res.ok) {
             throw new Error('get tasks failed')

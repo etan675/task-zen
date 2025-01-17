@@ -6,7 +6,7 @@ import { basePath } from '../appConsts';
 const authService = createAuthService();
 
 const loginController = (req: Request, res: Response) => {
-    res.sendFile(path.join(basePath, 'public/login.html'));
+    res.sendFile(path.join(basePath, '/views/login.html'));
 }
 
 const loginPostController = async (req: Request, res: Response) => {
@@ -15,6 +15,8 @@ const loginPostController = async (req: Request, res: Response) => {
     const auth = await authService.authenticate(email, password);
 
     if (auth) {
+        // TODO: set session
+        
         res.json({ message: 'Login successful' })
 
     } else {
