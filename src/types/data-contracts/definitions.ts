@@ -12,7 +12,12 @@ type UserDataContract = {
     password: string
 }
 
+type SessionDataContract = {
+    id: number
+}
+
 export {
     TaskDataContract,
-    UserDataContract
+    UserDataContract,
+    SessionDataContract
 }
