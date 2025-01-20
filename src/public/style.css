@@ -245,15 +245,6 @@ body {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.tasks-sidebar__profile-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  flex: 0 0 auto;
-  fill: currentColor;
-  border-radius: 0.4rem;
-  overflow: hidden;
-  background-color: #464646;
-}
 .tasks-sidebar__down-chevron {
   width: 1.7rem;
   height: 1.7rem;

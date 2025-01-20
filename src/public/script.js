@@ -269,6 +269,7 @@ window.addEventListener('load', () => {
 
     if (username) {
         profileUsername.textContent = username;
+        profileUsername.title = username
     }
 
     handleDisplayTasks();
