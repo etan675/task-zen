@@ -43,7 +43,7 @@ loginInputs.forEach(input => {
 loginForm.addEventListener('submit', handleLoginFormSubmit);
 
 
-// data
+// data fetching
 const login = async (email, password) => {
     const res = await fetch('/login', {
         method: 'POST',

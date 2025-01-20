@@ -135,6 +135,7 @@ body {
   transform: translateY(0px);
 }
 .todo-item__dropdown-edit-button, .todo-item__dropdown-delete-button {
+  text-align: left;
   background-color: transparent;
   border: none;
   color: inherit;
@@ -199,6 +200,11 @@ body {
   gap: 0.4rem;
 }
 .tasks-sidebar__tab {
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
   padding: 0.8rem 1rem;
   display: flex;
   align-items: center;
@@ -270,6 +276,11 @@ body {
   transform: translateY(0px);
 }
 .tasks-sidebar-profile-dropdown__tab {
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
   padding: 0.8rem 1rem;
   display: flex;
   align-items: center;

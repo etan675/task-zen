@@ -1,18 +1,12 @@
 import { Response } from "express";
-import { createTasksService } from "../initservices";
-import path from "path";
-import { basePath } from "../appConsts";
-import { CustomRequest as Request } from "../types/definitions";
+import { createTasksService } from "../../init-services";
+import { CustomRequest as Request } from "../../types/definitions";
 
 const taskService = createTasksService();
 
-const taskPageController = (req: Request, res: Response) => {
-    res.sendFile(path.join(basePath, '/views/tasks.html'));
-}
-
 const getTasksController = async (req: Request, res: Response) => {
     if (!req.user) {
-        res.status(401).send('Not logged in');
+        res.status(401).json({ message: 'Not logged in' });
         return;
     }
 
@@ -22,7 +16,7 @@ const getTasksController = async (req: Request, res: Response) => {
 
 const newTaskController = async (req: Request, res: Response) => {
     if (!req.user) {
-        res.status(401).send('Not logged in');
+        res.status(401).json({ message: 'Not logged in' });
         return;
     }
 
@@ -39,7 +33,7 @@ const newTaskController = async (req: Request, res: Response) => {
 
 const editTaskController = async (req: Request, res: Response) => {
     if (!req.user) {
-        res.status(401).send('Not logged in');
+        res.status(401).json({ message: 'Not logged in' });
         return;
     }
 
@@ -57,7 +51,7 @@ const editTaskController = async (req: Request, res: Response) => {
 
 const deleteTaskController = async (req: Request, res: Response) => {
     if (!req.user) {
-        res.status(401).send('Not logged in');
+        res.status(401).json({ message: 'Not logged in' });
         return;
     }
 
@@ -74,8 +68,7 @@ const deleteTaskController = async (req: Request, res: Response) => {
 
 export {
     newTaskController,
-    getTasksController as tasksController,
-    taskPageController,
+    getTasksController,
     editTaskController,
     deleteTaskController
 }

@@ -188,6 +188,8 @@
     }
 
     &__tab {
+        @include mixins.buttonReset;
+
         padding: .8rem 1rem;
         display: flex;
         align-items: center;
@@ -264,6 +266,8 @@
     }
     
     &__tab {
+        @include mixins.buttonReset;
+
         padding: .8rem 1rem;
         display: flex;
         align-items: center;

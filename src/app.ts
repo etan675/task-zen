@@ -1,12 +1,13 @@
 import express from 'express';
 import path from 'path';
 import rootRouter from './routes/index';
-import taskRouter from './routes/tasks';
 import 'dotenv/config';
-import loginRouter from './routes/login';
-import { basePath } from './appConsts';
+import { basePath } from './app-consts';
 import cookieParser from 'cookie-parser';
-import validateUserSession from './middleware/validateUserSession';
+import apiRouter from './routes/api';
+import loginRouter from './routes/login';
+import logoutRouter from './routes/logout';
+import validateUserSession from './middleware/validate-user-session';
 
 const app = express();
 
@@ -19,8 +20,9 @@ app.use(cookieParser());
 
 // routes
 app.use('/', rootRouter);
-app.use('/tasks', validateUserSession, taskRouter);
 app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
+app.use('/api', validateUserSession, apiRouter);
 
 // catch all middleware
 app.use((req, res) => {

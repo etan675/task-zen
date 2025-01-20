@@ -29,6 +29,7 @@
 }
 
 @mixin buttonReset {
+    text-align: left;
     background-color: transparent;
     border: none;
     color: inherit;

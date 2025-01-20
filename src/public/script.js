@@ -6,6 +6,8 @@ const newTaskInput = document.getElementById('newTaskInput');
 const addTaskButton = document.querySelector(".add-task-button");
 const todoList = document.querySelector(".todo-list");
 const sidebarProfileTab = document.getElementById('tasksSidebarProfileTab');
+const sidebarProfileDropdown = document.querySelector('.tasks-sidebar-profile-dropdown');
+const logoutButton = document.getElementById('logoutButton');
 const sidebarTabs = document.querySelectorAll('.tasks-sidebar__tab');
 
 // helpers
@@ -19,6 +21,11 @@ const removeElement = (el) => {
 
 const displayElement = (el) => {
     el.classList.remove('hidden');
+}
+
+const handleLoginRedirect = () => {
+    alert('Session expired, please log in.');
+    window.location.replace('/login');
 }
 
 // event handlers
@@ -209,8 +216,14 @@ const handleSidebarProfileClick = (e) => {
     const dropdown = document.querySelector('.tasks-sidebar-profile-dropdown');
     
     dropdown.classList.toggle('tasks-sidebar-profile-dropdown--open');
-    // align with ride edge of profile tab
+    // align with right edge of profile tab
     dropdown.style.left = `${rect.right - dropdown.offsetWidth}px`;
+}
+
+const handleSidebarProfileDropdownClick = (e) => {
+    const dropdown = e.currentTarget;
+
+    dropdown.classList.remove('tasks-sidebar-profile-dropdown--open');
 }
 
 const handleSidebarProfileDropdownOutsideClick = (e) => {
@@ -229,11 +242,17 @@ const handleSidebarTabClick = (e) => {
     tab.classList.add('tasks-sidebar__tab--active');
 }
 
+const handleLogoutButtonClick = () => {
+    logout();
+}
+
 // event listeners
 addTaskButton.addEventListener('click', handleAddTaskButtonClick);
 newTaskForm.addEventListener('submit', handleCreateNewTask);
 newTaskInput.addEventListener('blur', handleNewTaskInputBlur);
 sidebarProfileTab.addEventListener('click', handleSidebarProfileClick);
+sidebarProfileDropdown.addEventListener('click', handleSidebarProfileDropdownClick);
+logoutButton.addEventListener('click', handleLogoutButtonClick);
 sidebarTabs.forEach(tab => {
     if (tab.id !== 'tasksSidebarProfileTab') {
         tab.addEventListener('click', handleSidebarTabClick);
@@ -252,9 +271,15 @@ window.addEventListener('load', () => {
 // data fetching
 const getTasks = async () => {
     try {
-        const res = await fetch('/tasks/all');
+        const res = await fetch('/api/tasks/all');
+
+        console.log('res: ', res);
 
         if (!res.ok) {
+            if (res.status === 401) {
+                handleLoginRedirect();
+            }
+
             throw new Error('get tasks failed')
         }
 
@@ -267,13 +292,17 @@ const getTasks = async () => {
 
 const createNewTask = async (task) => {
     try {
-        const res = await fetch('/tasks/new', {
+        const res = await fetch('/api/tasks/new', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(task)
         })
 
         if (!res.ok) {
+            if (res.status === 401) {
+                handleLoginRedirect();
+            }
+
             throw new Error('create task failed')
         }
 
@@ -294,13 +323,17 @@ const editTaskContent = async (taskId, content) => {
 
 const editTask = async (taskId, newTask) => {
     try {
-        const res = await fetch(`/tasks/edit/${taskId}`, {
+        const res = await fetch(`/api/tasks/edit/${taskId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ ...newTask }),
         });
 
         if (!res.ok) {
+            if (res.status === 401) {
+                handleLoginRedirect();
+            }
+
             throw new Error('edit task failed');
         }
 
@@ -313,11 +346,15 @@ const editTask = async (taskId, newTask) => {
 
 const deleteTask = async (taskId) => {
     try {
-        const res = await fetch(`/tasks/delete/${taskId}`, {
+        const res = await fetch(`/api/tasks/delete/${taskId}`, {
             method: 'DELETE'
         });
 
         if (!res.ok) {
+            if (res.status === 401) {
+                handleLoginRedirect();
+            }
+
             throw new Error('delete task failed');
         }
 
@@ -326,4 +363,14 @@ const deleteTask = async (taskId) => {
     } catch (err) {
         console.error(err);
     }
+}
+
+const logout = () => {
+    fetch('/logout', { method: 'POST' }).then((res) => {
+        if (res.ok) {
+            window.location.reload();
+        }
+    }).catch((err) => {
+        console.error(err);
+    });
 }

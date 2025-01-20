@@ -8,7 +8,7 @@
     "dev": "npm-run-all --parallel watch:express watch:sass",
     "test": "jest",
     "lint": "eslint -c eslint.config.mjs ",
-    "watch:express": "nodemon --exec tsx src/initApp.ts",
+    "watch:express": "nodemon --exec tsx src/init-app.ts",
     "watch:sass": "sass --watch ./src/sass/main.scss ./src/public/style.css "
   },
   "type": "module",

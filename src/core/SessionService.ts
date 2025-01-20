@@ -19,15 +19,12 @@ class SessionService implements SessionServiceInterface {
         return session;
     }
 
-    //TODO: implement log out using this fn
-    async destroySession(sid: number): Promise<number> {
-        const deletedSid = await this.sessionRepository.deleteSession(sid);
-
-        if (!deletedSid) {
-            throw new Error("Failed to delete session");
+    async destroyUserSession(userId: number): Promise<void> {
+        try {
+            await this.sessionRepository.deleteSession(userId);
+        } catch {
+            throw new Error("Failed to delete user session");
         }
-
-        return deletedSid;
     }
 
     async getById(sessionId: number) {
