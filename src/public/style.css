@@ -109,9 +109,10 @@ body {
   width: 4rem;
   height: 4rem;
   cursor: pointer;
-  margin-right: 0.2rem;
+  margin-right: 0.4rem;
   padding: 0.4rem;
   transition: background 0.2s;
+  overflow: hidden;
 }
 .todo-item__kebab-menu svg {
   width: 100%;

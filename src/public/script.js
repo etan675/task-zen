@@ -9,6 +9,7 @@ const sidebarProfileTab = document.getElementById('tasksSidebarProfileTab');
 const sidebarProfileDropdown = document.querySelector('.tasks-sidebar-profile-dropdown');
 const logoutButton = document.getElementById('logoutButton');
 const sidebarTabs = document.querySelectorAll('.tasks-sidebar__tab');
+const profileUsername = document.getElementById('profileUsername');
 
 // helpers
 const isDisplayed = (el) => {
@@ -128,7 +129,7 @@ const handleKebabMenuClick = (e) => {
 
         // align with kebab menu
         dropdown.style.top = `${rect.bottom}px`;
-        dropdown.style.left = `${rect.left + window.scrollX + 17}px`;
+        dropdown.style.right = `${window.innerWidth - rect.right}px`;
     
         dropdown.classList.add('todo-item__dropdown--open');
 
@@ -264,6 +265,12 @@ window.addEventListener('click', (e) => {
 })
 
 window.addEventListener('load', () => {
+    const username = sessionStorage.getItem('userEmail');
+
+    if (username) {
+        profileUsername.textContent = username;
+    }
+
     handleDisplayTasks();
 })
 

@@ -1,16 +1,17 @@
 import { SessionDataContract } from "../types/data-contracts/definitions";
+import { UserData } from "../types/definitions";
 import SessionRepositoryInterface from "./repository-interfaces/SessionRepositoryInterface";
-import SessionServiceInterface from "./service-Interfaces/SessionServiceInterface";
 
-class SessionService implements SessionServiceInterface {
+class SessionService {
     private sessionRepository: SessionRepositoryInterface;
 
     constructor(sessionRepository: SessionRepositoryInterface) {
         this.sessionRepository = sessionRepository;
     }
 
-    async createUserSession(userId: number): Promise<SessionDataContract> {
-        const session = await this.sessionRepository.createSession(userId);
+    async createUserSession(user: UserData): Promise<SessionDataContract> {
+        const sessionData = { user: { email: user.email } };
+        const session = await this.sessionRepository.createSession(user.id, sessionData);
 
         if (!session) {
             throw new Error('Failed to create session');

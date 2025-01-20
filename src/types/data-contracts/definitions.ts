@@ -13,7 +13,8 @@ type UserDataContract = {
 
 type SessionDataContract = {
     id: number,
-    userId: number
+    userId: number,
+    user: { email: string }
 }
 
 export {

@@ -1,6 +1,7 @@
 import { Pool } from "pg";
 import SessionRepositoryInterface from "../core/repository-interfaces/SessionRepositoryInterface";
 import { SessionDataContract } from "../types/data-contracts/definitions";
+import { SessionData } from "../types/definitions";
 
 class SessionRepository implements SessionRepositoryInterface {
     private db: Pool;
@@ -9,19 +10,22 @@ class SessionRepository implements SessionRepositoryInterface {
         this.db = dbClient;
     }
 
-    async createSession(userId: number): Promise<SessionDataContract|undefined> {
+    async createSession(userId: number, data: SessionData): Promise<SessionDataContract|undefined> {
         const query = `
-            INSERT INTO "Session" ("userId")
-            VALUES ($1)
+            INSERT INTO "Session" ("userId", "sessionData")
+            VALUES ($1, $2)
             RETURNING *;
         `;
 
-        const res = await this.db.query(query, [userId]);
+        const res = await this.db.query(query, [userId, data]);
         const session = res.rows[0];
 
         return session && {
             id: session.id,
-            userId: session.userId
+            userId: session.userId,
+            user: {
+                email: session.sessionData.user.email
+            }
         }
     }
 
@@ -45,7 +49,10 @@ class SessionRepository implements SessionRepositoryInterface {
 
         return session && {
             id: session.id,
-            userId: session.userId
+            userId: session.userId,
+            user: {
+                email: session.sessionData.user.email
+            }
         }
     }
 }

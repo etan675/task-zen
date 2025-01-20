@@ -5,18 +5,25 @@ type TaskUpdateSchema = {
     checked?: boolean
 }
 
-type RequestUserData = {
+type UserData = {
     id: number,
     email: string,
 }
 
 interface CustomRequest extends Request {
-    user?: RequestUserData
+    user?: UserData
+}
+
+type SessionData = {
+    user: {
+        email: string
+    }
 }
 
 export {
     TaskUpdateSchema,
-    RequestUserData,
-    CustomRequest
+    UserData,
+    CustomRequest,
+    SessionData
 };
 

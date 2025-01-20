@@ -9,16 +9,20 @@ const handleLoginFormSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(loginForm);
+    const email = formData.get('email');
+    const password = formData.get('password');
 
-    const loginSuccess = await login(formData.get('email'), formData.get('password'));
+    const loginSuccess = await login(email, password);
     
     if (loginSuccess) {
-        window.location.replace('/');
+        sessionStorage.setItem('userEmail', email);
+
+        window.location.replace('/tasks');
 
     } else {
         //TODO: show login fail message
 
-        console.log('login failed!');
+        console.error('login failed!');
     }
 }
 
