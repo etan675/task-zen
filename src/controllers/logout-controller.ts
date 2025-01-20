@@ -5,8 +5,8 @@ import { CustomRequest as Request } from '../types/definitions';
 const sessionService = createSessionService();
 
 const logoutController = async (req: Request, res: Response) => {
-    if (req.user) {
-        await sessionService.destroyUserSession(req.user.id);
+    if (req.cookies.sessionId) {
+        await sessionService.destroySession(req.cookies.sessionId);
     }
 
     res.clearCookie('sessionId');

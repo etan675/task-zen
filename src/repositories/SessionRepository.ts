@@ -25,13 +25,13 @@ class SessionRepository implements SessionRepositoryInterface {
         }
     }
 
-    async deleteSession(userId: number): Promise<void> {
+    async deleteSession(id: number): Promise<void> {
         const query = `
             DELETE FROM "Session" 
-            WHERE "userId" = $1;
+            WHERE "id" = $1;
         `;
 
-        await this.db.query(query, [userId]);
+        await this.db.query(query, [id]);
     }
 
     async getById(id: number): Promise<SessionDataContract|undefined> {

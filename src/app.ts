@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// routes
+// root routes
 app.use('/', rootRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);

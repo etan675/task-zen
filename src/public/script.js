@@ -173,12 +173,11 @@ const handleShowTaskEdit = (e) => {
 
     if (!isDisplayed(todoTextInput)) {
         todoTextInput.disabled = false;
-
+        
+        removeElement(todoText);
         displayElement(todoTextInput);
 
         todoTextInput.focus();
-
-        removeElement(todoText);
     }
 }
 
@@ -272,8 +271,6 @@ window.addEventListener('load', () => {
 const getTasks = async () => {
     try {
         const res = await fetch('/api/tasks/all');
-
-        console.log('res: ', res);
 
         if (!res.ok) {
             if (res.status === 401) {

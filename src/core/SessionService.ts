@@ -19,11 +19,11 @@ class SessionService implements SessionServiceInterface {
         return session;
     }
 
-    async destroyUserSession(userId: number): Promise<void> {
+    async destroySession(sessionId: number): Promise<void> {
         try {
-            await this.sessionRepository.deleteSession(userId);
+            await this.sessionRepository.deleteSession(sessionId);
         } catch {
-            throw new Error("Failed to delete user session");
+            throw new Error("Failed to delete user's session");
         }
     }
 

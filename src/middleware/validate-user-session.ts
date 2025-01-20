@@ -5,21 +5,27 @@ import { CustomRequest as Request } from "../types/definitions";
 const sessionService = createSessionService();
 const userService = createUserService();
 
+const handleUnauthorisedResponse = (req: Request, res: Response) => {
+    if (req.path.startsWith('/api')) {
+        res.status(401).json({ message: 'Session expired' });
+
+    } else {
+        res.redirect('/login');
+    }
+}
+
 const validateUserSession = async (req: Request, res: Response, next: NextFunction) => {
     const sessionId = req.cookies.sessionId;
-
+    
     if (!sessionId) {
-        //TODO: redirect to login page if the request comes from
-        // a page load (cannot return json to page requests)
-
-        res.status(401).json({ message: 'Session expired' });
+        handleUnauthorisedResponse(req, res);
         return;
     } 
 
     const session = await sessionService.getById(sessionId);
 
     if (!session) {
-        res.status(401).json({ message: 'Session expired' });
+        handleUnauthorisedResponse(req, res);
         return;
     }
 

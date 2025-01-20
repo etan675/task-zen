@@ -12,7 +12,9 @@
     flex-direction: column;
     gap: 3rem;
     min-width: 40rem;
-    padding: 12rem 15% 6rem 25%;
+    max-width: 100rem;
+    padding: 12rem 6rem 6rem 12rem;
+    margin: 0 auto;
     font-size: 3rem;
 
     &__header {
@@ -39,16 +41,17 @@
     justify-content: space-between;
 
     &__content-container {
+        flex: 1;
         padding: .8rem;
         display: flex;
         gap: 1.2rem;
+        max-width: calc(100% - 5rem);
     }
 
     &__content {
         cursor: pointer;
         display: flex;
         gap: 1.2rem;
-        width: fit-content;
 
         input[type="checkbox"]:checked + .todo-item__text {
             color: #b0b0b0;
@@ -75,11 +78,18 @@
         }
     }
 
+    &__text {
+        max-width: 100%;
+        word-break: break-word;
+    }
+
     &__text-input {
         all: unset;
+        width: 100%;
     }
 
     &__kebab-menu {
+        flex-shrink: 0;
         width: 4rem;
         height: 4rem;
         cursor: pointer;
