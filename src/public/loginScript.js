@@ -3,6 +3,7 @@
 // elements
 const loginForm = document.getElementById('loginForm');
 const loginInputs = document.querySelectorAll('.login-form__input');
+const loginFailMessage = document.querySelector('.login-form__fail-message');
 
 // event handlers
 const handleLoginFormSubmit = async (e) => {
@@ -20,9 +21,7 @@ const handleLoginFormSubmit = async (e) => {
         window.location.replace('/tasks');
 
     } else {
-        //TODO: show login fail message
-
-        console.error('login failed!');
+        loginFailMessage.classList.toggle('hidden');
     }
 }
 

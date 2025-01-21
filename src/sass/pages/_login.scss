@@ -18,6 +18,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 2rem;
+    font-size: 1.6rem;
 
     &__header {
         font-size: 3rem;
@@ -72,5 +73,11 @@
             border: 1px solid black;
             transform: scale(1.01);
         }
+    }
+
+    &__fail-message {
+        color: red;
+        width: 100%;
+        text-align: center;
     }
 }
