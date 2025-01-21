@@ -246,6 +246,21 @@ const handleLogoutButtonClick = () => {
     logout();
 }
 
+const handleDisplayUsername = async () => {
+    const username = sessionStorage.getItem('userEmail');
+
+    if (username) {
+        profileUsername.textContent = username;
+        profileUsername.title = username
+
+    } else {
+        const loggedInUser = await getLoggedInUser();
+
+        profileUsername.textContent = loggedInUser.email;
+        profileUsername.title = loggedInUser.email;
+    }
+}
+
 // event listeners
 addTaskButton.addEventListener('click', handleAddTaskButtonClick);
 newTaskForm.addEventListener('submit', handleCreateNewTask);
@@ -265,13 +280,7 @@ window.addEventListener('click', (e) => {
 })
 
 window.addEventListener('load', () => {
-    const username = sessionStorage.getItem('userEmail');
-
-    if (username) {
-        profileUsername.textContent = username;
-        profileUsername.title = username
-    }
-
+    handleDisplayUsername();
     handleDisplayTasks();
 })
 
@@ -378,4 +387,23 @@ const logout = () => {
     }).catch((err) => {
         console.error(err);
     });
+}
+
+const getLoggedInUser = async () => {
+    try {
+        const res = await fetch('/api/users/loggedInUser');
+
+        if (!res.ok) {
+            if (res.status === 401) {
+                handleLoginRedirect();
+            }
+
+            throw new Error('failed to get user');
+        }
+
+        return await res.json();
+
+    } catch (err) {
+        console.err(err);
+    }
 }
