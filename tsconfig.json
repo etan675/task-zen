@@ -14,12 +14,10 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "bundler",
     "useUnknownInCatchVariables": false,
+    "noEmit": true,
     "outDir": "./build",
     "rootDir": "./src"
   },
-  "references": [
-    { "path": "./__tests__" }
-  ],
   "include": ["./src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }
