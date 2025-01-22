@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login &ndash; TaskZen</title>
+    <title>Sign up &ndash; TaskZen</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
@@ -13,15 +13,14 @@
             <form id="loginForm" class="login-form">
                 <header class="login-form__header">
                     <div class="login-form__header--main">Think it. Track it.</div>
-                    <div class="login-form__header--sub">Log in to your TaskZen account</div>
+                    <div class="login-form__header--sub">Sign up for your TaskZen account</div>
                 </header>
                 <div class="login-form__separator"></div>
                 <input class="login-form__input" type="email" name="email" id="loginEmail" required placeholder="Enter your email...">
-                <input class="login-form__input" type="password" name="password" id="loginPassword" required placeholder="Enter your password...">
-                <p class="login-form__fail-message hidden">Email or password is incorrect</p>
+                <input class="login-form__input" type="password" name="password" id="loginPassword" required placeholder="Enter your new password...">
+                <p class="login-form__fail-message hidden">Sign up failed, try another email or password</p>
                 <button class="login-form__button">Continue</button>
             </form>
-            <a href="/signup">Sign up</a>
         </div>
     </main>
 </body>

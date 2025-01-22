@@ -13,15 +13,32 @@ const handleLoginFormSubmit = async (e) => {
     const email = formData.get('email');
     const password = formData.get('password');
 
-    const loginSuccess = await login(email, password);
+    const signupSuccess = await login(email, password);
     
-    if (loginSuccess) {
+    if (signupSuccess) {
         sessionStorage.setItem('userEmail', email);
 
         window.location.replace('/tasks');
 
     } else {
-        loginFailMessage.classList.toggle('hidden');
+        loginFailMessage.classList.remove('hidden');
+    }
+}
+
+const handleSignupFormSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(loginForm);
+    const email = formData.get('email');
+    const password = formData.get('password');
+
+    const signupSuccess = await signup(email, password);
+    
+    if (signupSuccess) {
+        window.location.replace('/login');
+
+    } else {
+        loginFailMessage.classList.remove('hidden');
     }
 }
 
@@ -43,12 +60,28 @@ loginInputs.forEach(input => {
     input.addEventListener('focus', handleInputFocus);
     input.addEventListener('blur', handleInputBlur);
 })
-loginForm.addEventListener('submit', handleLoginFormSubmit);
+
+if (window.location.pathname === '/login') {
+    loginForm.addEventListener('submit', handleLoginFormSubmit);
+
+} else if (window.location.pathname === '/signup') {
+    loginForm.addEventListener('submit', handleSignupFormSubmit);
+}
 
 
 // data fetching
 const login = async (email, password) => {
     const res = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    })
+
+    return res.ok;
+}
+
+const signup = async (email, password) => {
+    const res = await fetch('/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

@@ -6,19 +6,23 @@
 
 .login-form-container {
     @include mixins.centerAbsolute;
-    top: 40%;
-}
-
-.login-form {
-    width: 42rem;
-    color: var(--black-bg);
-    border-radius: 1.2rem;
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 2rem;
     font-size: 1.6rem;
+    top: 40%;
+}
+
+.login-form {
+    width: 39rem;
+    color: var(--black-bg);
+    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
 
     &__header {
         font-size: 3rem;

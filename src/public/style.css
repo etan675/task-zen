@@ -312,19 +312,23 @@ body {
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
-  top: 40%;
-}
-
-.login-form {
-  width: 42rem;
-  color: var(--black-bg);
-  border-radius: 1.2rem;
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
   font-size: 1.6rem;
+  top: 40%;
+}
+
+.login-form {
+  width: 39rem;
+  color: var(--black-bg);
+  border-radius: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
 }
 .login-form__header {
   font-size: 3rem;
