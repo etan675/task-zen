@@ -13,7 +13,8 @@ const loginController = async (req: Request, res: Response) => {
 
     if (user && authenticated) {
         //TODO: implement session expiry & cookie persistence
-        const session = await sessionService.createUserSession(user);
+        const userData = { id: user.id, email: user.email };
+        const session = await sessionService.createUserSession(userData);
     
         res.cookie('sessionId', session.id, {
             httpOnly: true,

@@ -21,6 +21,20 @@ class UserService implements UserServiceInterface {
 
         return user;
     }
+
+    async createUser(email: string, password: string) {
+        const existingUser = await this.getByEmail(email);
+        if (existingUser) {
+            throw new Error(`User already exists`);
+        }
+
+        const createdUser = await this.userRepository.createUser(email, password);
+        if (!createdUser) {
+            throw new Error('User creation failed');
+        }
+
+        return createdUser;
+    }
 }
 
 export default UserService;

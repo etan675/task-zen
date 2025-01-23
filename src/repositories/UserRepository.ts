@@ -37,6 +37,23 @@ class UserRepository implements UserRepositoryInterface {
             password: user.password
         }
     }
+
+    async createUser(email: string, password: string): Promise<UserDataContract|undefined> {
+        const query = `
+            INSERT INTO "User" ("email", "password")
+            VALUES ($1, $2)
+            RETURNING *;
+        `;
+
+        const res = await this.db.query(query, [email, password]);
+        const user = res.rows[0];
+
+        return user && {
+            id: user.id,
+            email: user.email,
+            password: user.password
+        }
+    }
 }
 
 export default UserRepository;

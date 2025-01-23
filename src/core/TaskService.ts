@@ -43,7 +43,7 @@ class TaskService {
         const task = await this.getTask(taskId);
 
         if (!this.taskAuthorisation.canEdit(task, userId)) {
-            throw new Error('User is not authorised to edit this task');
+            throw new Error('User cannot edit this task');
         }
 
         const editedTask = await this.taskRepository.editTask(taskId, updateFields);
@@ -59,7 +59,7 @@ class TaskService {
         const task = await this.getTask(taskId);
 
         if (!this.taskAuthorisation.canEdit(task, userId)) {
-            throw new Error('User is not authorised to delete this task');
+            throw new Error('User cannot delete this task');
         }
 
         const deletedTaskId = await this.taskRepository.deleteTask(taskId);

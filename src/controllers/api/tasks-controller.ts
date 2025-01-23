@@ -26,8 +26,8 @@ const newTaskController = async (req: Request, res: Response) => {
         const createdTask = await taskService.createUserTask(req.user.id, newTask);
         res.json(createdTask);
 
-    } catch {
-        res.status(500).json({ error: 'could not create task' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 }
 
@@ -42,10 +42,15 @@ const editTaskController = async (req: Request, res: Response) => {
 
     try {
         const result = await taskService.editUserTask(parseInt(id), req.user.id, fields);
-        res.status(200).json(result);
+        res.json(result);
 
-    } catch {
-        res.status(404).json({ error: 'item not found' })
+    } catch (err) {
+        if (err.message === 'User cannot edit this task') {
+            res.status(403).json({ message: 'You are not authorised to edit this task' });
+            return;
+        }
+
+        res.status(404).json({ message: 'item not found' })
     }
 } 
 
@@ -61,8 +66,13 @@ const deleteTaskController = async (req: Request, res: Response) => {
         const deletedId = await taskService.deleteUserTask(parseInt(id), req.user.id);
         res.json({ deletedId });
 
-    } catch {
-        res.status(404).json({ error: 'item not found' });
+    } catch (err) {
+        if (err.message === 'User cannot delete this task') {
+            res.status(403).json({ message: 'You are not authorised to delete this task' });
+            return;
+        }
+
+        res.status(404).json({ message: 'item not found' });
     }
 }
 
