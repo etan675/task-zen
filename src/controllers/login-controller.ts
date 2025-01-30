@@ -18,7 +18,7 @@ const loginController = async (req: Request, res: Response) => {
     
         res.cookie('sessionId', session.id, {
             httpOnly: true,
-            sameSite: true,
+            sameSite: 'lax',
             secure: process.env.NODE_ENV === 'production'
         });
         res.json({ message: 'Login successful' });
