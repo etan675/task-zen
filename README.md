@@ -12,11 +12,11 @@ A full stack task tracking app.
 
 ### Motivation:
 
-Don't use any frameworks to build a professional CRUD app
+Build a professional CRUD app, using only fundamental technologies
+
+After around 2.5 years of working in web development, I got used to thinking about everything in frameworks and internal tools, and found it difficult to apply my knowlegde elsewhere. So for this project, the goal is to revisit the fundamentals of web development. I chose a simple todo app for this as I wanted to keep the functionalities/features straightforward and focus more on the architectural details of a web application, which are often abstracted away by modern powerful frameworks.
 
 Style is inspired by my favourite productivity tool Notion :)
-
-After around 2.5 years of working I felt like I got too used to thinking about everything in frameworks and internal tools, and found it difficult to apply that knowlegde elsewhere. So for this project I wanted to revisit the fundamentals of web development. I chose a simple todo app for this cos I didn't want to focus too much on cool functionality/features but rather the overall architecture of a web app, from an index.html file to a finished application on the internet.
 
 
 ### APP URL:
