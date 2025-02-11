@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        // same as root tsconfig
+        "lib": ["es2023"],
+        "module": "ES2022",
+        "target": "es2022",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "bundler",
+        "useUnknownInCatchVariables": false,
+
+        // test specific config
+        "composite": true,
+        "types": ["jest"],
+    },
+    "include": ["**/*.ts", "../src/**/*.ts"],
+}
+  
