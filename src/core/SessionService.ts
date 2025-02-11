@@ -1,11 +1,11 @@
 import { SessionDataContract } from "../types/data-contracts/definitions";
 import { UserData } from "../types/definitions";
-import SessionRepositoryInterface from "./repository-interfaces/SessionRepositoryInterface";
+import ISessionRepo from "./repository-interfaces/ISessionRepo";
 
 class SessionService {
-    private sessionRepository: SessionRepositoryInterface;
+    private sessionRepository: ISessionRepo;
 
-    constructor(sessionRepository: SessionRepositoryInterface) {
+    constructor(sessionRepository: ISessionRepo) {
         this.sessionRepository = sessionRepository;
     }
 

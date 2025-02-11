@@ -1,9 +1,9 @@
-import TaskRepositoryInterface from "../core/repository-interfaces/TaskRepositoryInterface";
+import ITaskRepo from "../core/repository-interfaces/ITaskRepo";
 import { Pool } from "pg";
 import { TaskDataContract } from "../types/data-contracts/definitions";
 import { TaskUpdateSchema } from "../types/definitions";
 
-class TaskRepository implements TaskRepositoryInterface {
+class TaskRepository implements ITaskRepo {
     private db: Pool;
 
     constructor(dbClient: Pool) {

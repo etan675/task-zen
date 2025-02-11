@@ -1,8 +1,8 @@
 import { Pool } from "pg";
-import UserRepositoryInterface from "../core/repository-interfaces/UserRepositoryInterface";
+import IUserRepo from "../core/repository-interfaces/IUserRepo";
 import { UserDataContract } from "../types/data-contracts/definitions";
 
-class UserRepository implements UserRepositoryInterface {
+class UserRepository implements IUserRepo {
     private db: Pool;
 
     constructor(dbClient: Pool) {

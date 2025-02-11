@@ -1,9 +1,9 @@
 import { Pool } from "pg";
-import SessionRepositoryInterface from "../core/repository-interfaces/SessionRepositoryInterface";
+import ISessionRepo from "../core/repository-interfaces/ISessionRepo";
 import { SessionDataContract } from "../types/data-contracts/definitions";
 import { SessionData } from "../types/definitions";
 
-class SessionRepository implements SessionRepositoryInterface {
+class SessionRepository implements ISessionRepo {
     private db: Pool;
 
     constructor(dbClient: Pool) {

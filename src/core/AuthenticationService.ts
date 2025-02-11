@@ -1,9 +1,9 @@
-import UserServiceInterface from "./service-Interfaces/UserServiceInterface";
+import IUserService from "./service-Interfaces/IUserService";
 
 class AuthenticationService {
-    private userService: UserServiceInterface;
+    private userService: IUserService;
 
-    constructor(userService: UserServiceInterface) {
+    constructor(userService: IUserService) {
         this.userService = userService;
     }
 

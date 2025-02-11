@@ -1,10 +1,10 @@
-import UserRepositoryInterface from "./repository-interfaces/UserRepositoryInterface";
-import UserServiceInterface from "./service-Interfaces/UserServiceInterface";
+import IUserRepo from "./repository-interfaces/IUserRepo";
+import IUserService from "./service-Interfaces/IUserService";
 
-class UserService implements UserServiceInterface {
-    private userRepository: UserRepositoryInterface;
+class UserService implements IUserService {
+    private userRepository: IUserRepo;
 
-    constructor(userRepository: UserRepositoryInterface) {
+    constructor(userRepository: IUserRepo) {
         this.userRepository = userRepository;
     }
 

@@ -1,9 +1,9 @@
 import { UserDataContract } from "../../types/data-contracts/definitions";
 
-interface UserServiceInterface {
+interface IUserService {
     getByEmail(email: string): Promise<UserDataContract|undefined>
     getById(id: number): Promise<UserDataContract>
     createUser(email: string, password: string): Promise<UserDataContract>
 }
 
-export default UserServiceInterface;
+export default IUserService;

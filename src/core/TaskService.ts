@@ -1,14 +1,14 @@
 import { TaskDataContract } from "../types/data-contracts/definitions";
 import { TaskUpdateSchema } from "../types/definitions";
-import TaskRepositoryInterface from "./repository-interfaces/TaskRepositoryInterface";
+import ITaskRepo from "./repository-interfaces/ITaskRepo";
 import TaskAuthorisationService from "./TaskAuthorisationService";
 
 class TaskService {
-    private taskRepository: TaskRepositoryInterface;
+    private taskRepository: ITaskRepo;
     private taskAuthorisation: TaskAuthorisationService
 
     constructor(
-        taskRepository: TaskRepositoryInterface,
+        taskRepository: ITaskRepo,
         taskAuthorisation: TaskAuthorisationService
     ) {
         this.taskRepository = taskRepository;
