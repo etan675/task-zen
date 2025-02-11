@@ -20,12 +20,14 @@ class SessionService {
         return session;
     }
 
-    async destroySession(sessionId: number): Promise<void> {
-        try {
-            await this.sessionRepository.deleteSession(sessionId);
-        } catch {
+    async destroySession(sessionId: number): Promise<number> {
+        const deletedId = await this.sessionRepository.deleteSession(sessionId);
+
+        if (!deletedId) {
             throw new Error("Failed to delete user's session");
         }
+
+        return deletedId;
     }
 
     async getById(sessionId: number) {

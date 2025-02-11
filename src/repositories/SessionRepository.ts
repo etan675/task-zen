@@ -29,13 +29,17 @@ class SessionRepository implements ISessionRepo {
         }
     }
 
-    async deleteSession(id: number): Promise<void> {
+    async deleteSession(id: number): Promise<number> {
         const query = `
             DELETE FROM "Session" 
-            WHERE "id" = $1;
+            WHERE "id" = $1
+            RETURNING *;
         `;
 
-        await this.db.query(query, [id]);
+        const res = await this.db.query(query, [id]);
+        const deleted = res.rows[0];
+
+        return deleted && deleted.id;
     }
 
     async getById(id: number): Promise<SessionDataContract|undefined> {
