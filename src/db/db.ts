@@ -9,6 +9,10 @@ const db = new Pool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
+    ...(process.env.NODE_ENV === 'production' ? {
+        // required for security to connect to db instance hosted on neon
+        ssl: { rejectUnauthorized: false }
+    } : {}) 
 });
 
 export default db;
