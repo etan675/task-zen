@@ -17,7 +17,7 @@ Build a professional CRUD app using basic web technologies (no frameworks)
 
 After around 2.5 years of working in web development, I got used to thinking about everything in frameworks and internal tools, and found it difficult to apply my knowlegde elsewhere. So for this project, the goal is to revisit the fundamentals of web development. I chose a simple todo app for this as I wanted to keep the functionalities/features straightforward and focus more on the architectural details of a web application, which are often abstracted away by modern powerful frameworks.
 
-Style is inspired by my favourite productivity tool Notion :)
+Style is inspired by Notion :)
 
 
 ### APP URL:
