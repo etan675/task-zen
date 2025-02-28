@@ -1,3 +1,6 @@
+// This config is for development purposes.
+// It lets TypeScript compile these test files during dev mode the same way as src files, 
+// so that we can also get get intellisense for our tests.
 {
     "compilerOptions": {
         // same as root tsconfig
