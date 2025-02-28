@@ -66,7 +66,11 @@ DB_USER=my_db_user
 DB_PASSWORD=my_db_password
 ```
 
-4. Run the app
+4. Set up DB
+- The app runs on PostgreSQL, you will need to set up a local Postgres server and create the database using the backup file in the project path: ```/sql/default-schema/xxx.sql``` (recommend using DBeaver for this), this is a backup of the production database which includes TaskZen's DB schema as well as some default data like the user for the demo account mentioned above.
+- Then, you need to configure TaskZen's connection to your local postgres server through the environment variables ```DB_HOST```, ```DB_PORT```, ```DB_NAME```, ```DB_USER```, ```DB_PASSWORD```, you should now be ready to run the app.
+
+5. Run the app
    
 - For development:
 ```bash
@@ -91,7 +95,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE).
 
 ## Notes:
 
-- The production app might seem a bit slow for a simple app, this is because I had to migrate the db to Neon from Render (free cloud hosting expired), which introduces network communication delays between app and db.
+- The production app might seem a bit slow for a simple app, this is because I had to migrate the DB to Neon from Render (free cloud hosting expired), which introduces network communication delays between app and db.
 
 
 
