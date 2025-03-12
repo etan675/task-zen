@@ -95,7 +95,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE).
 
 ## Notes:
 
-- The production app can sometimes be a bit slow, this is because I had to migrate the DB to Neon from Render (free cloud hosting expired), which introduces network communication delays between app and db.
+- The production app can sometimes be a bit slow, this is because I had to migrate the DB to Neon from Render (free cloud hosting expired), which introduces some network delays.
 
 
 
