@@ -60,11 +60,11 @@ const setTasksState = (newTasks) => {
 }
 
 const handleDisplayTasks = () => {
-    // reset items in dom 
+    // revalidate items in dom 
     const todoItems = document.querySelectorAll('.todo-item');
     todoItems.forEach(el => {
         el.remove();
-    })
+    });
 
     if (tasksState) {
         const template = document.getElementById('todo-item-template');
@@ -90,7 +90,7 @@ const handleDisplayTasks = () => {
             span.textContent = task.content;
 
             textInput.value = task.content;
-            textInput.onblur = handleTodoTextInputBlur;
+            textInput.onblur = handleTodoInputSubmit;
             textInput.onkeydown = handleTodoTextInputKeydown;
 
             kebabMenu.onclick = handleKebabMenuClick;
@@ -129,11 +129,16 @@ const handleCheckboxChange = async (e) => {
     // disabled when waiting for query response
     checkbox.disabled = true;
 
-    const newTask = await changeTaskChecked(taskId, checkbox.checked);
+    const editedTask = await changeTaskChecked(taskId, checkbox.checked);
 
-    // revalidate the checkbox state
-    checkbox.checked = newTask.checked;
-    checkbox.disabled = false
+    setTasksState(tasksState.map(task => {
+        if (parseInt(task.id) === parseInt(editedTask.id)) {
+            return editedTask;
+        }
+
+        return task;
+    }));
+    handleDisplayTasks();
 }
 
 const handleKebabMenuClick = (e) => {
@@ -201,7 +206,7 @@ const handleShowTaskEdit = (e) => {
     }
 }
 
-const handleTodoTextInputBlur = async (e) => {
+const handleTodoInputSubmit = async (e) => {
     const todoTextInput = e.target;
     const todoItem = todoTextInput.closest('.todo-item');
     const todoText = todoItem.querySelector('.todo-item__text');
@@ -210,10 +215,16 @@ const handleTodoTextInputBlur = async (e) => {
 
     todoTextInput.disabled = true;
 
-    // if was active then unfocused, just submit the new content
     const editedTask = await editTaskContent(taskId, todoTextInput.value);
 
-    todoText.textContent = editedTask.content;
+    setTasksState(tasksState.map(task => {
+        if (parseInt(task.id) === parseInt(editedTask.id)) {
+            return editedTask;
+        }
+
+        return task;
+    }));
+    handleDisplayTasks();
 
     removeElement(todoTextInput);
     displayElement(todoText);
