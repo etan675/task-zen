@@ -11,6 +11,9 @@ const logoutButton = document.getElementById('logoutButton');
 const sidebarTabs = document.querySelectorAll('.tasks-sidebar__tab');
 const profileUsername = document.getElementById('profileUsername');
 
+// client side state
+let tasksState = [];
+
 // helpers
 const isDisplayed = (el) => {
     return !el.classList.contains('hidden');
@@ -47,13 +50,26 @@ const handleNewTaskInputBlur = () => {
     displayElement(addTaskButton);
 }
 
-const handleDisplayTasks = async () => {
+const getTasksState = async () => {
     const tasks = await getTasks();
+    tasksState = [...tasks];
+}
 
-    if (tasks) {
+const setTasksState = (newTasks) => {
+    tasksState = [...newTasks];
+}
+
+const handleDisplayTasks = () => {
+    // reset items in dom 
+    const todoItems = document.querySelectorAll('.todo-item');
+    todoItems.forEach(el => {
+        el.remove();
+    })
+
+    if (tasksState) {
         const template = document.getElementById('todo-item-template');
-
-        tasks.forEach((task) => {
+    
+        tasksState.forEach((task) => {
             const todoItemClone = template.content.cloneNode(true);
 
             const container = todoItemClone.querySelector('.todo-item');
@@ -96,10 +112,13 @@ const handleCreateNewTask = async (e) => {
     const formData = new FormData(newTaskForm);
     const data = { newTask: formData.get('newTask') };
 
-    await createNewTask(data);
+    const newTask = await createNewTask(data);
+    tasksState.push(newTask);
 
-    // can client side revalidate
-    window.location.reload();
+    setTasksState(tasksState);
+    handleDisplayTasks();
+
+    newTaskInput.blur();
 }
 
 const handleCheckboxChange = async (e) => {
@@ -160,10 +179,10 @@ const handleTaskDelete = async (e) => {
     
     const taskId = todoItem.dataset.id;
 
-    await deleteTask(taskId);
+    const { deletedId } = await deleteTask(taskId);
 
-    // can client side revalidate
-    window.location.reload();
+    setTasksState(tasksState.filter(task => parseInt(task.id) !== parseInt(deletedId)));
+    handleDisplayTasks();
 }
 
 const handleShowTaskEdit = (e) => {
@@ -279,8 +298,9 @@ window.addEventListener('click', (e) => {
     handleSidebarProfileDropdownOutsideClick(e);
 })
 
-window.addEventListener('load', () => {
-    handleDisplayUsername();
+window.addEventListener('load', async () => {
+    await handleDisplayUsername();
+    await getTasksState();
     handleDisplayTasks();
 })
 
