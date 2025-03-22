@@ -19,9 +19,9 @@ This is a learning project. The goal is to build a **professional** CRUD app usi
 
 Design is inspired by Notion. :)
 
-After around 2.5 years of working, I became accustomed to thinking about everything in terms of frameworks and internal tools, and found it difficult to apply my knowledge in a broader context. For this project, the goal is to revisit the fundamentals of web development. The app itself is very straightforward, but it focuses more on the architectural details of a web app and what goes on under the hood, like DOM manipulation, CSR/SSR, server routes, secure cookies, and database interactions. Modern frameworks like React or Next.js often let you work on abstractions that sit a few layers above these foundational concepts, and they are the norm for developers now.
+After around 2.5 years of working, I became accustomed to thinking about everything in terms of frameworks and internal tools, and found it difficult to apply my knowledge in a broader context. For this project, the goal is to revisit the fundamentals of web development. The app itself is very straightforward, but it focuses more on the architectural details of a web app and what goes on under the hood, like DOM manipulation, CSR/SSR, session auth, and database interactions. Modern frameworks like React or Next.js often let you work on abstractions that sit a few layers above these foundational concepts, and they are the norm for developers now.
 
-Admittedly, it is quite tedious to build any software without tooling or frameworks, especially in areas as mature as the web. You will be writing a lot of boilerplate code for not much functionality at all. But imo, building with the lower-level stuff first will enable you to better utilise the power of the modern tools, as you'll have a deeper understanding of how they work, and why exactly they were invented in the first place.
+Admittedly, it is quite tedious to build any software without tooling or frameworks, especially in areas as mature as the web. You will be writing a lot of boilerplate code for not much functionality at all. But imo, building with the lower-level stuff will enable you to better utilise the power of the modern tools, you'll have a deeper understanding of how they work, and why exactly they were invented in the first place.
 
 
 ## Live App:
